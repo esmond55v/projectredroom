@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROJECT REDROOM</title>
+
+<!-- SEO -->
+<meta name="description" content="PROJECT REDROOM — [TODO: replace with one-sentence product description, ~150 chars max].">
+<meta name="theme-color" content="#8B1A2A">
+
+<!-- Open Graph (Facebook, LinkedIn, iMessage) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectredroom.com/">
+<meta property="og:title" content="PROJECT REDROOM">
+<meta property="og:description" content="[TODO: replace with one-sentence product description.]">
+<meta property="og:image" content="https://projectredroom.com/og-image.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://projectredroom.com/">
+<meta name="twitter:title" content="PROJECT REDROOM">
+<meta name="twitter:description" content="[TODO: replace with one-sentence product description.]">
+<meta name="twitter:image" content="https://projectredroom.com/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+
+<!-- SHARED SVG DEFS — used by all sunglass illustrations -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <!-- Lens fills: deep dark wine-black -->
+  <linearGradient id="LL" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#1e0a0e"/><stop offset="100%" stop-color="#030102"/>
+  </linearGradient>
+  <linearGradient id="LR" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#160808"/><stop offset="100%" stop-color="#020101"/>
+  </linearGradient>
+  <!-- Frame acetate -->
+  <linearGradient id="FR" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#2c2c2c"/><stop offset="40%" stop-color="#0e0e0e"/><stop offset="100%" stop-color="#030303"/>
+  </linearGradient>
+  <!-- Glass glint top edge -->
+  <linearGradient id="GT" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="white" stop-opacity="0"/>
+    <stop offset="26%" stop-color="white" stop-opacity=".24"/>
+    <stop offset="58%" stop-color="white" stop-opacity=".05"/>
+    <stop offset="100%" stop-color="white" stop-opacity="0"/>
+  </linearGradient>
+  <!-- Diagonal sheen -->
+  <linearGradient id="SH" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="white" stop-opacity=".09"/>
+    <stop offset="48%" stop-color="white" stop-opacity=".01"/>
+    <stop offset="100%" stop-color="white" stop-opacity=".04"/>
+  </linearGradient>
+  <!-- Metal rivet -->
+  <radialGradient id="RV" cx="30%" cy="30%" r="65%">
+    <stop offset="0%" stop-color="#eeeeee"/>
+    <stop offset="44%" stop-color="#aaaaaa"/>
+    <stop offset="100%" stop-color="#444444"/>
+  </radialGradient>
+  <!-- Drop shadows -->
+  <filter id="FS"><feDropShadow dx="0" dy="9" stdDeviation="16" flood-color="#000" flood-opacity=".38"/></filter>
+  <filter id="FA"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".44"/></filter>
+  <filter id="FC"><feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#1a1a1a" flood-opacity=".28"/></filter>
+</defs>
+</svg>
+
+<!-- OVERLAYS -->
+<div class="ov" id="ov" onclick="closeAll()"></div>
+<div class="movl" id="movl" onclick="closeSG()"></div>
+<div class="ov" id="pov" onclick="closeEP()"></div>
+
+<!-- CART -->
+<div class="cart" id="cart">
+  <div class="dh">
+    <div class="dt" id="ctit">YOUR CART</div>
+    <button class="dx" onclick="closeCart()">&#x2715;</button>
+  </div>
+  <div class="clist" id="clist"></div>
+  <div class="cfooter" id="cfooter" style="display:none">
+    <div class="csub-row">
+      <span class="csubl">Subtotal</span>
+      <span class="csubp" id="csub">S$0</span>
+    </div>
+    <button class="bd" style="width:100%;text-align:center;padding:14px;margin-bottom:8px" onclick="goTo('checkout');closeCart()">CHECKOUT</button>
+    <button class="bo" style="width:100%;text-align:center;padding:10px" onclick="goTo('shop');closeCart()">CONTINUE SHOPPING</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="ldr" id="ldr">
+  <div class="dh"><div class="dt">MY ACCOUNT</div><button class="dx" onclick="closeLdr()">&#x2715;</button></div>
+  <div class="dtabs">
+    <div class="dtab on" id="t1" onclick="swTab('t1','f1')">SIGN IN</div>
+    <div class="dtab" id="t2" onclick="swTab('t2','f2')">REGISTER</div>
+  </div>
+  <div class="dform" id="f1">
+    <label class="fl">Email</label><input class="fi" type="email" placeholder="your@email.com">
+    <label class="fl">Password</label><input class="fi" type="password" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;">
+    <div style="font-size:11px;color:var(--r);cursor:pointer;margin-bottom:18px">Forgot password?</div>
+    <button class="bd" style="width:100%;text-align:center;padding:13px" onclick="toast('Signed in')">SIGN IN</button>
+    <div style="height:1px;background:var(--s0);margin:20px 0"></div>
+    <div style="font-size:9px;letter-spacing:2px;color:var(--f);text-align:center;text-transform:uppercase;margin-bottom:13px">Or continue with</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="bo" style="padding:9px;font-size:9.5px;text-align:center" onclick="toast('Coming soon')">Google</button>
+      <button class="bo" style="padding:9px;font-size:9.5px;text-align:center" onclick="toast('Coming soon')">Apple</button>
+    </div>
+  </div>
+  <div class="dform" id="f2" style="display:none">
+    <label class="fl">Full Name</label><input class="fi" placeholder="Your name">
+    <label class="fl">Email</label><input class="fi" type="email" placeholder="your@email.com">
+    <label class="fl">Password</label><input class="fi" type="password" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;">
+    <button class="bd" style="width:100%;text-align:center;padding:13px;margin-top:6px" onclick="toast('Account created!')">CREATE ACCOUNT</button>
+  </div>
+</div>
+
+<!-- EMAIL POPUP (replaces age gate) -->
+<div class="ov on" id="pov2" onclick="closeEP()"></div>
+<div class="epop on" id="ep">
+  <div class="epl">
+    <div style="font-size:8.5px;letter-spacing:5px;color:var(--s3);text-transform:uppercase;margin-bottom:18px">Project Redroom</div>
+    <div style="font-family:'Oswald';font-size:30px;letter-spacing:2px;color:#fff;line-height:.95;text-transform:uppercase;margin-bottom:12px">BE THE<br>FIRST TO<br>KNOW.</div>
+    <div style="font-size:11.5px;color:var(--s3);line-height:1.7">Drop alerts, exclusive access and early offers.</div>
+  </div>
+  <div style="padding:44px 28px;position:relative">
+    <button onclick="closeEP()" style="position:absolute;top:13px;right:13px;background:none;border:none;font-size:14px;color:var(--f);cursor:pointer">&#x2715;</button>
+    <div style="font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--f);margin-bottom:13px">Early Access</div>
+    <div style="font-family:'Oswald';font-size:20px;letter-spacing:2px;color:var(--c);margin-bottom:18px;text-transform:uppercase">Join the list.</div>
+    <input class="fi" type="email" placeholder="your@email.com" style="width:100%">
+    <button class="br" onclick="closeEP();toast('You\'re on the list.')" style="width:100%;text-align:center;padding:12px;margin-top:2px">SUBSCRIBE</button>
+    <div style="font-size:11px;color:var(--f);cursor:pointer;text-align:center;margin-top:12px;font-style:italic" onclick="closeEP()">No thanks, not yet.</div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="srch" id="srch">
+  <div style="display:flex;align-items:center;gap:18px;border-bottom:2px solid var(--c);padding-bottom:18px;margin-bottom:36px">
+    <span style="font-size:19px;color:var(--s3)">&#x2315;</span>
+    <input class="si" id="sri" placeholder="SEARCH..." onkeyup="if(event.key==='Enter'){closeSrch();goTo('shop');toast('Results for: '+this.value)}">
+    <button onclick="closeSrch()" style="font-size:22px;color:var(--s3);background:none;border:none;cursor:pointer">&#x2715;</button>
+  </div>
+  <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--f);margin-bottom:16px">Quick Links</div>
+  <div>
+    <div onclick="closeSrch();goTo('shop')" style="font-family:'Oswald';font-size:26px;letter-spacing:2px;color:var(--s1);cursor:pointer;padding:10px 0;border-bottom:1px solid var(--s0);transition:color .2s;text-transform:uppercase" onmouseover="this.style.color='var(--c)'" onmouseout="this.style.color='var(--s1)'">All Sunglasses &rarr;</div>
+    <div onclick="closeSrch();goTo('collections')" style="font-family:'Oswald';font-size:26px;letter-spacing:2px;color:var(--s1);cursor:pointer;padding:10px 0;border-bottom:1px solid var(--s0);transition:color .2s;text-transform:uppercase" onmouseover="this.style.color='var(--c)'" onmouseout="this.style.color='var(--s1)'">The REDROOM Set &rarr;</div>
+    <div onclick="closeSrch();goTo('about')" style="font-family:'Oswald';font-size:26px;letter-spacing:2px;color:var(--s1);cursor:pointer;padding:10px 0;border-bottom:1px solid var(--s0);transition:color .2s;text-transform:uppercase" onmouseover="this.style.color='var(--c)'" onmouseout="this.style.color='var(--s1)'">About Us &rarr;</div>
+    <div onclick="closeSrch();goTo('faq')" style="font-family:'Oswald';font-size:26px;letter-spacing:2px;color:var(--s1);cursor:pointer;padding:10px 0;border-bottom:1px solid var(--s0);transition:color .2s;text-transform:uppercase" onmouseover="this.style.color='var(--c)'" onmouseout="this.style.color='var(--s1)'">FAQ &amp; Support &rarr;</div>
+  </div>
+</div>
+
+<!-- SIZE GUIDE -->
+<div class="mbox" id="mbox">
+  <div class="mhd"><div class="mht">FRAME SIZE GUIDE</div><button class="dx" onclick="closeSG()" style="color:var(--s2)">&#x2715;</button></div>
+  <div class="mbody">
+    <div style="background:var(--s0);height:100px;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+      <svg viewBox="0 0 360 76" width="320">
+        <rect x="8" y="12" width="132" height="50" rx="6" fill="none" stroke="#857F78" stroke-width="1.1"/>
+        <rect x="220" y="12" width="132" height="50" rx="6" fill="none" stroke="#857F78" stroke-width="1.1"/>
+        <line x1="140" y1="37" x2="220" y2="37" stroke="#857F78" stroke-width="1.1"/>
+        <line x1="8" y1="16" x2="2" y2="37" stroke="#857F78" stroke-width="1"/>
+        <line x1="352" y1="16" x2="358" y2="37" stroke="#857F78" stroke-width="1"/>
+        <text x="180" y="42" text-anchor="middle" fill="#857F78" font-size="7.5" font-family="Inter" letter-spacing="2">BRIDGE</text>
+        <text x="74" y="72" text-anchor="middle" fill="#A09890" font-size="7.5" font-family="Inter" letter-spacing="1">LENS WIDTH</text>
+        <text x="286" y="72" text-anchor="middle" fill="#A09890" font-size="7.5" font-family="Inter" letter-spacing="1">LENS WIDTH</text>
+      </svg>
+    </div>
+    <table class="stbl">
+      <thead><tr><th>Design</th><th>Frame Front</th><th>Frame Side</th><th>Lens W</th><th>Lens H</th><th>Bridge</th></tr></thead>
+      <tbody>
+        <tr><td onclick="goTo('product1');closeSG()">01 — Oversized Square</td><td>148.2mm</td><td>147mm</td><td>65.3mm</td><td>55.8mm</td><td>15mm</td></tr>
+        <tr><td onclick="goTo('product2');closeSG()">02 — Rect Cateye</td><td>146.8mm</td><td>144mm</td><td>53.3mm</td><td>35mm</td><td>19mm</td></tr>
+        <tr><td onclick="goTo('product3');closeSG()">03 — Oval Cateye</td><td>147.2mm</td><td>146.3mm</td><td>53.5mm</td><td>33.3mm</td><td>21mm</td></tr>
+        <tr><td onclick="goTo('product4');closeSG()">04 — Rectangular</td><td>146.8mm</td><td>146.5mm</td><td>52.2mm</td><td>33.2mm</td><td>22mm</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:10.5px;color:var(--f);margin-top:13px;font-style:italic">Measure across the widest point of the lens for lens width.</p>
+  </div>
+</div>
+
+<div class="toast" id="tst"></div>
+
+<!-- ════════════ NAV ════════════ -->
+<nav id="nav">
+  <div class="logo" onclick="goTo('home')">PROJECT REDROOM</div>
+  <div class="nav-links">
+    <span class="nl" id="ns" onclick="goTo('shop')">Shop</span>
+    <span class="nl" id="nc" onclick="goTo('collections')">Collections</span>
+    <span class="nl" id="na" onclick="goTo('about')">About</span>
+    <span class="nl" id="nf" onclick="goTo('faq')">FAQ</span>
+  </div>
+  <div class="nav-icons">
+    <span class="ni" onclick="openSrch()">&#x2315;</span>
+    <span class="ni" onclick="openLdr()">&#x25CE;</span>
+    <span class="ni" onclick="openCart()" style="position:relative">&#x25FB;<span class="cbadge" id="cbd">2</span></span>
+  </div>
+</nav>
+
+<!-- ════════════ HOME ════════════ -->
+<div class="page active" id="page-home">
+
+<!-- HERO CAROUSEL — 4 slides -->
+<div class="hero" id="hero">
+  <div class="ctrack" id="ctr">
+
+    <!-- SLIDE 1: D01 — Dark editorial -->
+    <div class="cslide">
+      <div class="sbg" style="background:linear-gradient(135deg,#18140F 0%,#281620 45%,#18140F 100%)"></div>
+      <!-- D01 Oversized Square — product photography style on dark bg -->
+      <svg class="sg-hero" viewBox="0 0 520 280" width="500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="s1bg" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#5C0A14" stop-opacity=".2"/><stop offset="100%" stop-color="#000" stop-opacity="0"/></radialGradient>
+          <filter id="s1s"><feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000" flood-opacity=".6"/></filter>
+          <filter id="s1a"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".5"/></filter>
+        </defs>
+        <ellipse cx="260" cy="145" rx="228" ry="114" fill="url(#s1bg)"/>
+        <!-- Arms -->
+        <polygon points="46,78 4,62 4,94 46,150" fill="#1c1c1c" filter="url(#s1a)"/>
+        <polygon points="46,78 4,62 4,67 46,81" fill="#2e2e2e"/>
+        <polygon points="474,78 516,62 516,94 474,150" fill="#1c1c1c" filter="url(#s1a)"/>
+        <polygon points="474,78 516,62 516,67 474,81" fill="#2e2e2e"/>
+        <!-- Left frame -->
+        <path d="M46,50 L246,42 L246,222 L226,229 L56,222 Q40,222 38,180 L36,66 Q36,50 46,50Z" fill="url(#FR)" stroke="#181818" stroke-width="1.5" filter="url(#s1s)"/>
+        <!-- Left lens -->
+        <path d="M48,54 L244,46 L244,218 L58,221 Q42,221 40,179 L38,68 Q38,54 48,54Z" fill="url(#LL)"/>
+        <path d="M48,54 L244,46 L244,218 L58,221 Q42,221 40,179 L38,68 Q38,54 48,54Z" fill="url(#SH)"/>
+        <path d="M52,54 L242,46 L242,63 L52,66Z" fill="url(#GT)" opacity=".95"/>
+        <!-- Right frame -->
+        <path d="M274,42 L474,50 Q484,50 484,66 L482,180 Q482,222 464,222 L284,229 L274,222Z" fill="url(#FR)" stroke="#181818" stroke-width="1.5" filter="url(#s1s)"/>
+        <!-- Right lens -->
+        <path d="M276,46 L472,54 Q482,54 480,68 L480,179 Q480,221 462,221 L276,218Z" fill="url(#LR)"/>
+        <path d="M276,46 L472,54 Q482,54 480,68 L480,179 Q480,221 462,221 L276,218Z" fill="url(#SH)"/>
+        <path d="M278,46 L470,54 L470,63 L278,63Z" fill="url(#GT)" opacity=".95"/>
+        <!-- Bridge -->
+        <path d="M246,98 Q260,82 274,98 L274,138 Q260,122 246,138Z" fill="#090909" stroke="#111" stroke-width=".8"/>
+        <path d="M250,103 Q260,89 270,103 L270,133 Q260,119 250,133Z" fill="#050505"/>
+        <!-- Rivets -->
+        <circle cx="56" cy="60" r="5.5" fill="url(#RV)"/>
+        <circle cx="464" cy="60" r="5.5" fill="url(#RV)"/>
+        <!-- Frame top highlight -->
+        <path d="M46,50 L246,42" stroke="#2e2e2e" stroke-width="1.5" fill="none"/>
+        <path d="M274,42 L474,50" stroke="#2e2e2e" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div class="scontent">
+        <div class="sey">Singapore &middot; 400 Pieces Only</div>
+        <div class="stit" style="color:#F7F4F0">BE THE<br><span style="color:#B49060">PROVO<br>CATION.</span></div>
+        <div class="ssub" style="color:#A09890">Design 01 &mdash; Oversized Square</div>
+        <div class="sbtns">
+          <button class="br" onclick="goTo('product1')">SHOP &mdash; S$79</button>
+          <button class="bo" onclick="goTo('about')" style="color:#C4BEB5;border-color:rgba(255,255,255,.18)">OUR STORY</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: D02 Cateye — Light metallic bg -->
+    <div class="cslide">
+      <div class="sbg" style="background:linear-gradient(140deg,#EDEAE5 0%,#D8D3CB 50%,#E8E4DE 100%)"></div>
+      <svg class="sg-hero" viewBox="0 0 500 260" width="480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="s2s"><feDropShadow dx="2" dy="13" stdDeviation="19" flood-color="#1a1a1a" flood-opacity=".26"/></filter>
+          <filter id="s2a"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1a1a1a" flood-opacity=".3"/></filter>
+        </defs>
+        <!-- Arms -->
+        <polygon points="40,70 4,56 4,84 40,130" fill="#181818" filter="url(#s2a)"/>
+        <polygon points="40,70 4,56 4,60 40,72" fill="#2a2a2a"/>
+        <polygon points="460,70 496,56 496,84 460,130" fill="#181818" filter="url(#s2a)"/>
+        <polygon points="460,70 496,56 496,60 460,72" fill="#2a2a2a"/>
+        <!-- Left cateye frame — swept outer top corner -->
+        <path d="M40,70 L228,64 L228,192 L212,196 L46,193 Q32,193 30,164 L28,93 L40,70Z" fill="url(#FR)" stroke="#161616" stroke-width="1.2" filter="url(#s2s)"/>
+        <path d="M42,73 L226,67 L226,189 L48,191 Q34,191 32,163 L30,94Z" fill="url(#LL)"/>
+        <path d="M42,73 L226,67 L226,189 L48,191 Q34,191 32,163 L30,94Z" fill="url(#SH)"/>
+        <path d="M44,73 L224,67 L224,84 L44,84Z" fill="url(#GT)" opacity=".9"/>
+        <!-- Right cateye frame -->
+        <path d="M260,64 L460,70 L468,93 L466,164 Q464,193 450,193 L268,196 L260,192Z" fill="url(#FR)" stroke="#161616" stroke-width="1.2" filter="url(#s2s)"/>
+        <path d="M262,67 L458,73 L466,94 L464,163 Q462,191 448,191 L262,189Z" fill="url(#LR)"/>
+        <path d="M262,67 L458,73 L466,94 L464,163 Q462,191 448,191 L262,189Z" fill="url(#SH)"/>
+        <path d="M264,67 L456,73 L456,84 L264,84Z" fill="url(#GT)" opacity=".9"/>
+        <!-- Bridge -->
+        <path d="M228,100 Q244,84 260,100 L260,134 Q244,118 228,134Z" fill="#090909" stroke="#111" stroke-width=".8"/>
+        <path d="M232,105 Q244,91 256,105 L256,129 Q244,115 232,129Z" fill="#050505"/>
+        <!-- Rivets -->
+        <circle cx="46" cy="76" r="4.5" fill="url(#RV)"/>
+        <circle cx="450" cy="76" r="4.5" fill="url(#RV)"/>
+        <!-- Red accent cateye dots -->
+        <circle cx="42" cy="73" r="3.5" fill="#A0202F"/>
+        <circle cx="458" cy="73" r="3.5" fill="#A0202F"/>
+      </svg>
+      <div class="scontent">
+        <div class="sey" style="color:var(--r)">New Drop &middot; Limited Edition</div>
+        <div class="stit" style="color:var(--c)">SHARP.<br>DELIB<br>ERATE.</div>
+        <div class="ssub" style="color:var(--m)">Design 02 &mdash; Rectangular Cateye</div>
+        <div class="sbtns">
+          <button class="bd" onclick="goTo('product2')">SHOP &mdash; S$79</button>
+          <button class="bo" onclick="goTo('shop')">ALL FRAMES</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: The Set on red -->
+    <div class="cslide">
+      <div class="sbg" style="background:linear-gradient(160deg,#8B1A2A 0%,#5C0A14 55%,#380810 100%)"></div>
+      <div style="position:absolute;right:7%;top:50%;transform:translateY(-50%)">
+        <svg viewBox="0 0 340 320" width="320" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 16px 48px rgba(0,0,0,.5))">
+          <rect x="70" y="12" width="200" height="136" rx="4" fill="#420810" stroke="#7A1020" stroke-width="1.5"/>
+          <rect x="70" y="12" width="200" height="33" rx="4" fill="#5C0A14"/>
+          <text x="170" y="32" text-anchor="middle" fill="rgba(255,255,255,.42)" font-family="Oswald" font-size="9.5" letter-spacing="5">PROJECT REDROOM</text>
+          <rect x="88" y="55" width="66" height="45" rx="4" fill="#120408" stroke="#7A1020" stroke-width="1"/>
+          <rect x="186" y="55" width="66" height="45" rx="4" fill="#120408" stroke="#7A1020" stroke-width="1"/>
+          <line x1="154" y1="77" x2="186" y2="77" stroke="#7A1020" stroke-width="1"/>
+          <rect x="24" y="164" width="78" height="110" rx="5" fill="#5C0A14" stroke="#B49060" stroke-width="1.1"/>
+          <circle cx="63" cy="156" r="15" fill="none" stroke="#B49060" stroke-width="1.3"/>
+          <rect x="238" y="178" width="42" height="52" rx="4" fill="none" stroke="#B49060" stroke-width="1.3"/>
+          <circle cx="259" cy="170" r="11" fill="none" stroke="#B49060" stroke-width="1.3"/>
+          <rect x="130" y="188" width="64" height="72" rx="2" fill="#38080E" stroke="#7A1020" stroke-width="1"/>
+          <text x="170" y="300" text-anchor="middle" fill="rgba(255,255,255,.52)" font-family="Oswald" font-size="10.5" letter-spacing="5">S$199</text>
+        </svg>
+      </div>
+      <div class="scontent">
+        <div class="sey">Complete Drop &middot; 400 Sets</div>
+        <div class="stit" style="color:#F7F4F0">THE<br>RED<br>ROOM<br>SET.</div>
+        <div class="ssub">Sunnies &middot; Pouch &middot; Box &middot; Keychain</div>
+        <button class="bo" onclick="goTo('collections')" style="color:#C4BEB5;border-color:rgba(255,255,255,.22)">VIEW THE SET</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: D04 Slim on pearl -->
+    <div class="cslide">
+      <div class="sbg" style="background:linear-gradient(135deg,#E8E4DE 0%,#D4CFC8 50%,#E2DED8 100%)"></div>
+      <svg class="sg-hero" viewBox="0 0 500 236" width="480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="s4s"><feDropShadow dx="2" dy="11" stdDeviation="17" flood-color="#1a1a1a" flood-opacity=".24"/></filter>
+          <filter id="s4a"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1a1a1a" flood-opacity=".28"/></filter>
+        </defs>
+        <polygon points="42,62 4,50 4,74 42,112" fill="#181818" filter="url(#s4a)"/>
+        <polygon points="42,62 4,50 4,54 42,64" fill="#2a2a2a"/>
+        <polygon points="458,62 496,50 496,74 458,112" fill="#181818" filter="url(#s4a)"/>
+        <polygon points="458,62 496,50 496,54 458,64" fill="#2a2a2a"/>
+        <!-- Left slim rect -->
+        <path d="M42,50 L228,46 L228,175 L44,178 Q30,178 28,157 L28,62 Q28,50 42,50Z" fill="url(#FR)" stroke="#161616" stroke-width="1.2" filter="url(#s4s)"/>
+        <path d="M44,53 L226,49 L226,172 L46,175 Q32,175 30,156 L30,64 Q30,53 44,53Z" fill="url(#LL)"/>
+        <path d="M44,53 L226,49 L226,172 L46,175 Q32,175 30,156 L30,64 Q30,53 44,53Z" fill="url(#SH)"/>
+        <path d="M46,53 L224,49 L224,62 L46,62Z" fill="url(#GT)" opacity=".9"/>
+        <!-- Right slim rect -->
+        <path d="M256,46 L458,50 Q470,50 470,62 L470,157 Q468,178 456,178 L256,175Z" fill="url(#FR)" stroke="#161616" stroke-width="1.2" filter="url(#s4s)"/>
+        <path d="M258,49 L456,53 Q468,53 466,64 L466,156 Q464,175 454,175 L258,172Z" fill="url(#LR)"/>
+        <path d="M258,49 L456,53 Q468,53 466,64 L466,156 Q464,175 454,175 L258,172Z" fill="url(#SH)"/>
+        <path d="M260,49 L454,53 L454,62 L260,62Z" fill="url(#GT)" opacity=".9"/>
+        <!-- Bridge -->
+        <path d="M228,92 Q242,78 256,92 L256,118 Q242,106 228,118Z" fill="#090909" stroke="#111" stroke-width=".7"/>
+        <circle cx="44" cy="57" r="4.5" fill="url(#RV)"/>
+        <circle cx="454" cy="57" r="4.5" fill="url(#RV)"/>
+      </svg>
+      <div class="scontent">
+        <div class="sey" style="color:var(--r)">Dark &middot; Minimal</div>
+        <div class="stit" style="color:var(--c)">DESIGN<br>04.</div>
+        <div class="ssub" style="color:var(--m)">Rectangular &mdash; Black Acetate</div>
+        <div class="sbtns">
+          <button class="bd" onclick="goTo('product4')">SHOP &mdash; S$79</button>
+          <button class="bo" onclick="goTo('shop')">ALL FRAMES</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /ctrack -->
+  <button class="cprev" onclick="prevSlide()">&#x2039;</button>
+  <button class="cnext" onclick="nextSlide()">&#x203A;</button>
+  <div class="cdots">
+    <button class="cdot on" onclick="goSlide(0)"></button>
+    <button class="cdot" onclick="goSlide(1)"></button>
+    <button class="cdot" onclick="goSlide(2)"></button>
+    <button class="cdot" onclick="goSlide(3)"></button>
+  </div>
+</div>
+
+<!-- BRAND INTRO -->
+<div class="brand-bar">
+  <div>
+    <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:12px">About the Brand</div>
+    <div class="bbtit">Not a brand.<br>A statement.</div>
+    <div class="bbbody">Project REDROOM is built for those who wear intention on their face. Four frames. Zero compromise. Dark, deliberate, disruptive — built in Singapore, worn everywhere that matters.</div>
+    <button class="bo" onclick="goTo('about')">READ THE MANIFESTO</button>
+  </div>
+  <div class="bvals">
+    <div class="bval"><div class="bvl">Material</div><div class="bvt">Italian acetate — same mills as the houses you can't afford.</div></div>
+    <div class="bval"><div class="bvl">Edition</div><div class="bvt">400 pieces. Once the room closes, it closes.</div></div>
+    <div class="bval"><div class="bvl">Design</div><div class="bvt">Four frames. Each a silhouette. No excess.</div></div>
+    <div class="bval"><div class="bvl">Origin</div><div class="bvt">Founded in Singapore. Worn everywhere that matters.</div></div>
+  </div>
+</div>
+
+<!-- COLLECTION STRIP -->
+<div class="cstrip">
+  <div class="cstrip-hd">
+    <div class="cstrip-tit">THE COLLECTION</div>
+    <span class="cstrip-lnk" onclick="goTo('shop')">View All &rarr;</span>
+  </div>
+  <div style="overflow:hidden">
+    <div class="ctrack2" id="ctr2">
+      <!-- Card D01 -->
+      <div class="cc" onclick="goTo('product1')">
+        <div class="cc-img" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+          <svg viewBox="0 0 268 152" width="240" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="26,40 4,32 4,48 26,74" fill="#1c1c1c"/>
+            <polygon points="242,40 264,32 264,48 242,74" fill="#1c1c1c"/>
+            <path d="M26,26 L122,22 L122,116 L32,118 Q20,118 18,97 L16,37 Q16,26 26,26Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M28,28 L120,24 L120,113 L34,115 Q22,115 20,96 L18,38 Q18,28 28,28Z" fill="url(#LL)"/>
+            <path d="M30,28 L118,24 L118,36 L30,36Z" fill="url(#GT)" opacity=".9"/>
+            <path d="M28,28 L120,24 L120,113 L34,115 Q22,115 20,96 L18,38 Q18,28 28,28Z" fill="url(#SH)"/>
+            <path d="M144,22 L242,26 Q250,26 250,37 L248,96 Q248,118 236,118 L144,116Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M146,24 L240,28 Q248,28 246,38 L246,96 Q246,115 234,115 L146,113Z" fill="url(#LR)"/>
+            <path d="M148,24 L238,28 L238,36 L148,36Z" fill="url(#GT)" opacity=".9"/>
+            <path d="M146,24 L240,28 Q248,28 246,38 L246,96 Q246,115 234,115 L146,113Z" fill="url(#SH)"/>
+            <path d="M122,54 Q133,44 144,54 L144,70 Q133,61 122,70Z" fill="#060606"/>
+            <circle cx="32" cy="30" r="3.5" fill="url(#RV)"/>
+            <circle cx="236" cy="30" r="3.5" fill="url(#RV)"/>
+          </svg>
+          <div class="cc-cta">Quick View</div>
+        </div>
+        <div class="cc-info">
+          <div class="cc-name">Design 01</div>
+          <div class="cc-sub">Oversized Square &middot; Black Acetate</div>
+          <div class="cc-price">S$79</div>
+        </div>
+      </div>
+      <!-- Card D02 -->
+      <div class="cc" onclick="goTo('product2')">
+        <div class="cc-img" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+          <svg viewBox="0 0 268 142" width="240" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="24,38 4,30 4,46 24,68" fill="#1c1c1c"/>
+            <polygon points="244,38 264,30 264,46 244,68" fill="#1c1c1c"/>
+            <path d="M24,38 L122,34 L122,106 L30,108 Q18,108 16,88 L14,54 L24,38Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M26,40 L120,36 L120,103 L32,105 Q20,105 18,87 L16,55Z" fill="url(#LL)"/>
+            <path d="M28,40 L118,36 L118,49 L28,49Z" fill="url(#GT)" opacity=".88"/>
+            <path d="M26,40 L120,36 L120,103 L32,105 Q20,105 18,87 L16,55Z" fill="url(#SH)"/>
+            <path d="M144,34 L244,38 L252,54 L250,88 Q248,108 236,108 L144,106Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M146,36 L242,40 L250,55 L248,87 Q246,105 234,105 L146,103Z" fill="url(#LR)"/>
+            <path d="M148,36 L240,40 L240,49 L148,49Z" fill="url(#GT)" opacity=".88"/>
+            <path d="M146,36 L242,40 L250,55 L248,87 Q246,105 234,105 L146,103Z" fill="url(#SH)"/>
+            <path d="M122,60 Q133,51 144,60 L144,75 Q133,67 122,75Z" fill="#060606"/>
+            <circle cx="30" cy="43" r="3" fill="url(#RV)"/>
+            <circle cx="236" cy="43" r="3" fill="url(#RV)"/>
+            <circle cx="26" cy="40" r="2.4" fill="#A0202F"/>
+            <circle cx="242" cy="40" r="2.4" fill="#A0202F"/>
+          </svg>
+          <div class="cc-cta">Quick View</div>
+        </div>
+        <div class="cc-info">
+          <div class="cc-name">Design 02</div>
+          <div class="cc-sub">Rectangular Cateye &middot; Black Acetate</div>
+          <div class="cc-price">S$79</div>
+        </div>
+      </div>
+      <!-- Card D03 -->
+      <div class="cc" onclick="goTo('product3')">
+        <div class="cc-img" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+          <svg viewBox="0 0 268 132" width="240" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="20,40 4,32 4,48 20,64" fill="#1c1c1c"/>
+            <polygon points="248,40 264,32 264,48 248,64" fill="#1c1c1c"/>
+            <path d="M20,40 Q20,18 58,16 L114,16 Q122,16 122,26 L122,100 L36,103 Q18,103 18,78Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M22,42 Q22,20 60,18 L112,18 Q120,18 120,27 L120,97 L38,100 Q20,100 20,77Z" fill="url(#LL)"/>
+            <path d="M46,18 L112,18 Q120,18 118,24 L46,25Z" fill="url(#GT)" opacity=".88"/>
+            <path d="M22,42 Q22,20 60,18 L112,18 Q120,18 120,27 L120,97 L38,100 Q20,100 20,77Z" fill="url(#SH)"/>
+            <path d="M134,26 Q134,16 142,16 L194,16 Q234,18 234,40 L236,78 Q236,103 214,103 L134,100Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M136,27 Q136,18 144,18 L192,18 Q232,20 232,42 L234,77 Q234,100 212,100 L136,97Z" fill="url(#LR)"/>
+            <path d="M138,25 L198,26 L198,18 L144,18 Q138,18 138,25Z" fill="url(#GT)" opacity=".88"/>
+            <path d="M136,27 Q136,18 144,18 L192,18 Q232,20 232,42 L234,77 Q234,100 212,100 L136,97Z" fill="url(#SH)"/>
+            <path d="M122,48 Q128,40 134,48 L134,62 Q128,55 122,62Z" fill="#060606"/>
+            <circle cx="36" cy="20" r="3.5" fill="url(#RV)"/>
+            <circle cx="212" cy="20" r="3.5" fill="url(#RV)"/>
+            <circle cx="22" cy="42" r="2.4" fill="#A0202F"/>
+            <circle cx="232" cy="42" r="2.4" fill="#A0202F"/>
+          </svg>
+          <div class="cc-cta">Quick View</div>
+        </div>
+        <div class="cc-info">
+          <div class="cc-name">Design 03</div>
+          <div class="cc-sub">Oval Cateye &middot; Black Acetate</div>
+          <div class="cc-price">S$79</div>
+        </div>
+      </div>
+      <!-- Card D04 -->
+      <div class="cc" onclick="goTo('product4')">
+        <div class="cc-img" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+          <svg viewBox="0 0 268 118" width="240" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="22,30 4,22 4,38 22,58" fill="#1c1c1c"/>
+            <polygon points="246,30 264,22 264,38 246,58" fill="#1c1c1c"/>
+            <path d="M22,20 L120,18 L120,88 L28,90 Q16,90 14,73 L14,28 Q14,20 22,20Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M24,22 L118,20 L118,85 L30,87 Q18,87 16,72 L16,29 Q16,22 24,22Z" fill="url(#LL)"/>
+            <path d="M26,22 L116,20 L116,30 L26,30Z" fill="url(#GT)" opacity=".88"/>
+            <path d="M24,22 L118,20 L118,85 L30,87 Q18,87 16,72 L16,29 Q16,22 24,22Z" fill="url(#SH)"/>
+            <path d="M146,18 L246,20 Q254,20 254,28 L254,73 Q252,90 240,90 L146,88Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+            <path d="M148,20 L244,22 Q252,22 250,29 L250,72 Q248,87 238,87 L148,85Z" fill="url(#LR)"/>
+            <path d="M150,20 L242,22 L242,30 L150,30Z" fill="url(#GT)" opacity=".88"/>
+            <path d="M148,20 L244,22 Q252,22 250,29 L250,72 Q248,87 238,87 L148,85Z" fill="url(#SH)"/>
+            <path d="M120,40 Q133,32 146,40 L146,53 Q133,47 120,53Z" fill="#060606"/>
+            <circle cx="28" cy="24" r="3.5" fill="url(#RV)"/>
+            <circle cx="240" cy="24" r="3.5" fill="url(#RV)"/>
+          </svg>
+          <div class="cc-cta">Quick View</div>
+        </div>
+        <div class="cc-info">
+          <div class="cc-name">Design 04</div>
+          <div class="cc-sub">Rectangular &middot; Black Acetate</div>
+          <div class="cc-price">S$79</div>
+        </div>
+      </div>
+      <!-- Card: The Set -->
+      <div class="cc" onclick="goTo('collections')">
+        <div class="cc-img" style="background:linear-gradient(145deg,#281620,#180A10)">
+          <div style="text-align:center;padding:24px">
+            <div style="font-size:8px;letter-spacing:5px;color:rgba(255,255,255,.32);text-transform:uppercase;margin-bottom:7px">Complete Drop</div>
+            <div style="font-family:'Oswald';font-size:24px;letter-spacing:3px;color:#F7F4F0;line-height:.96;text-transform:uppercase">The<br>REDROOM<br>Set</div>
+            <div style="width:32px;height:1px;background:#B49060;margin:13px auto"></div>
+            <div style="font-size:8.5px;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase">400 Units Only</div>
+          </div>
+          <div class="cc-cta">View Set</div>
+        </div>
+        <div class="cc-info">
+          <div class="cc-name">The REDROOM Set</div>
+          <div class="cc-sub">Complete Bundle &middot; Limited to 400</div>
+          <div class="cc-price">S$199</div>
+        </div>
+      </div>
+    </div><!-- /ctrack2 -->
+  </div>
+  <div class="strip-dots">
+    <button class="sd on" onclick="scrollStrip(0)"></button>
+    <button class="sd" onclick="scrollStrip(1)"></button>
+    <button class="sd" onclick="scrollStrip(2)"></button>
+  </div>
+</div>
+
+<!-- MOOD PHOTOS -->
+<div class="mood">
+  <div class="mood-tit">Dark. Deliberate. <em style="font-weight:300;font-style:italic">Disruptive.</em></div>
+  <div class="mgrid">
+    <!-- Large cell -->
+    <div class="mc mc-tall">
+      <div class="mph mph-tall" style="background:linear-gradient(160deg,#1a0508,#281018,#0e0e0e);aspect-ratio:1/2">
+        <svg viewBox="0 0 190 340" width="150" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="95" cy="228" rx="80" ry="11" fill="rgba(0,0,0,.28)"/>
+          <!-- D01 worn editorial -->
+          <polygon points="22,98 6,90 6,106 22,127" fill="#181818"/>
+          <polygon points="168,98 184,90 184,106 168,127" fill="#181818"/>
+          <path d="M22,86 L88,82 L88,132 L28,134 Q16,134 14,114 L12,98 Q12,86 22,86Z" fill="#0d0508" stroke="#8B1A2A" stroke-width=".9"/>
+          <path d="M24,88 L86,84 L86,129 L30,131 Q18,131 16,112 L14,99 Q14,88 24,88Z" fill="#160810"/>
+          <path d="M26,88 L84,84 L84,97 L26,97Z" fill="rgba(255,255,255,.18)"/>
+          <path d="M106,82 L168,86 Q176,86 174,98 L172,112 Q172,134 160,134 L106,132Z" fill="#0d0508" stroke="#8B1A2A" stroke-width=".9"/>
+          <path d="M108,84 L166,88 Q174,88 172,99 L172,112 Q172,131 160,131 L108,129Z" fill="#160810"/>
+          <path d="M110,84 L164,88 L164,97 L110,97Z" fill="rgba(255,255,255,.18)"/>
+          <path d="M88,108 Q97,98 106,108 L106,120 Q97,111 88,120Z" fill="#050505"/>
+          <circle cx="28" cy="90" r="3" fill="#888"/>
+          <circle cx="162" cy="90" r="3" fill="#888"/>
+          <rect x="66" y="152" width="58" height="186" rx="3" fill="rgba(255,255,255,.02)"/>
+        </svg>
+      </div>
+      <div class="mcap"><div class="mcap-txt">Design 01 &mdash; Oversized Square</div></div>
+    </div>
+    <!-- Top right -->
+    <div class="mc">
+      <div class="mph" style="background:linear-gradient(135deg,#E8E4DE,#D4CFC8)">
+        <!-- Product flat-lay D02 -->
+        <svg viewBox="0 0 240 240" width="196" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="120" cy="158" rx="90" ry="12" fill="rgba(0,0,0,.07)"/>
+          <polygon points="22,86 4,78 4,94 22,116" fill="#181818"/>
+          <polygon points="218,86 236,78 236,94 218,116" fill="#181818"/>
+          <path d="M22,76 L110,72 L110,148 L28,150 Q16,150 14,130 L12,92 L22,76Z" fill="#0d0d0d" stroke="#181818" stroke-width="1"/>
+          <path d="M24,78 L108,74 L108,145 L30,147 Q18,147 16,128 L14,93Z" fill="#160810"/>
+          <path d="M26,78 L106,74 L106,87 L26,87Z" fill="rgba(255,255,255,.2)"/>
+          <path d="M128,72 L218,76 L226,92 L224,130 Q222,150 210,150 L128,148Z" fill="#0d0d0d" stroke="#181818" stroke-width="1"/>
+          <path d="M130,74 L216,78 L224,93 L222,129 Q220,147 208,147 L130,145Z" fill="#160810"/>
+          <path d="M132,74 L214,78 L214,87 L132,87Z" fill="rgba(255,255,255,.2)"/>
+          <path d="M110,97 Q119,88 128,97 L128,113 Q119,105 110,113Z" fill="#060606"/>
+          <circle cx="28" cy="80" r="3" fill="#888"/>
+          <circle cx="210" cy="80" r="3" fill="#888"/>
+          <circle cx="24" cy="78" r="2.2" fill="#A0202F"/>
+          <circle cx="214" cy="78" r="2.2" fill="#A0202F"/>
+        </svg>
+        <div class="mcap" style="background:linear-gradient(transparent,rgba(212,207,200,.88))">
+          <div class="mcap-txt" style="color:var(--c)">Design 02 &mdash; Cateye</div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom right -->
+    <div class="mc">
+      <div class="mph" style="background:linear-gradient(160deg,#5C0A14,#380810)">
+        <div style="padding:30px;text-align:center">
+          <div style="font-family:'Oswald';font-size:34px;font-weight:500;color:rgba(255,255,255,.9);line-height:.92;letter-spacing:3px;text-transform:uppercase">The<br>REDROOM<br>Set.</div>
+          <div style="width:26px;height:1px;background:#B49060;margin:16px auto"></div>
+          <div style="font-size:8px;letter-spacing:4px;color:rgba(255,255,255,.34);text-transform:uppercase">S$199 &middot; Limited</div>
+          <button class="bo" onclick="goTo('collections')" style="margin-top:16px;color:rgba(255,255,255,.56);border-color:rgba(255,255,255,.16);font-size:9px;padding:8px 20px;letter-spacing:2px">EXPLORE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGING -->
+<div class="pkg">
+  <div>
+    <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:12px">Complete Drop</div>
+    <div class="pkg-tit">The REDROOM<br>Set.</div>
+    <div class="pkg-body">Everything you need. Nothing you don't. Sunglasses, red leather pouch with silver carabiner, dark red hard box, metallic keychain. All as a single unified object.</div>
+    <div style="font-size:12.5px;color:var(--s3);margin-bottom:26px;line-height:1.85">
+      Sunglasses &middot; Red leather pouch &middot; Dark red box with embossed logo &middot; Keychain (condom or cherry) &middot; Lens cloth
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="bd" onclick="addToCart(2,'The REDROOM Set','Sunnies + Pouch + Box',199)">ADD TO CART &mdash; S$199</button>
+      <button class="bo" onclick="goTo('collections')">EXPLORE</button>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,#18140F,#281820);padding:52px;display:flex;align-items:center;justify-content:center">
+    <svg viewBox="0 0 270 284" width="240" xmlns="http://www.w3.org/2000/svg">
+      <rect x="44" y="10" width="182" height="116" rx="4" fill="#380810" stroke="#7A1020" stroke-width="1.5"/>
+      <rect x="44" y="10" width="182" height="30" rx="4" fill="#5C0A14"/>
+      <text x="135" y="29" text-anchor="middle" fill="rgba(255,255,255,.38)" font-family="Oswald" font-size="8.5" letter-spacing="5">PROJECT REDROOM</text>
+      <rect x="62" y="48" width="60" height="40" rx="4" fill="#120408" stroke="#7A1020" stroke-width=".9"/>
+      <rect x="148" y="48" width="60" height="40" rx="4" fill="#120408" stroke="#7A1020" stroke-width=".9"/>
+      <line x1="122" y1="68" x2="148" y2="68" stroke="#7A1020" stroke-width=".9"/>
+      <rect x="18" y="140" width="70" height="100" rx="5" fill="#5C0A14" stroke="#B49060" stroke-width="1"/>
+      <circle cx="53" cy="132" r="13" fill="none" stroke="#B49060" stroke-width="1.2"/>
+      <rect x="182" y="156" width="38" height="48" rx="4" fill="none" stroke="#B49060" stroke-width="1.2"/>
+      <circle cx="201" cy="148" r="10" fill="none" stroke="#B49060" stroke-width="1.2"/>
+      <rect x="100" y="166" width="58" height="64" rx="2" fill="#340810" stroke="#7A1020" stroke-width=".9"/>
+      <text x="135" y="260" text-anchor="middle" fill="rgba(255,255,255,.46)" font-family="Oswald" font-size="9.5" letter-spacing="4">S$199</text>
+    </svg>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="nl-bar">
+  <div>
+    <div class="nl-tit">JOIN THE LIST.</div>
+    <div class="nl-sub">Early access &middot; drop alerts &middot; exclusive offers</div>
+  </div>
+  <div class="nl-frm">
+    <input class="nl-in" type="email" placeholder="your@email.com" id="nli">
+    <button class="br" onclick="nlSub()">SUBSCRIBE</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg">
+    <div>
+      <div class="fbrand">PROJECT REDROOM</div>
+      <div class="ftag">Be The Provocation</div>
+      <div style="margin-top:24px;display:flex;gap:16px">
+        <span style="cursor:pointer;color:#3A3530;font-size:9.5px;letter-spacing:2px;transition:color .2s;text-transform:uppercase" onmouseover="this.style.color='#C4BEB5'" onmouseout="this.style.color='#3A3530'">Instagram</span>
+        <span style="cursor:pointer;color:#3A3530;font-size:9.5px;letter-spacing:2px;transition:color .2s;text-transform:uppercase" onmouseover="this.style.color='#C4BEB5'" onmouseout="this.style.color='#3A3530'">TikTok</span>
+      </div>
+    </div>
+    <div class="fc"><h4>Shop</h4><a onclick="goTo('shop')">All Products</a><a onclick="goTo('collections')">Collections</a><a onclick="openCart()">Cart</a></div>
+    <div class="fc"><h4>Company</h4><a onclick="goTo('about')">About Us</a><a onclick="goTo('faq')">FAQ</a><a onclick="goTo('faq')">Shipping</a><a onclick="goTo('faq')">Returns</a></div>
+    <div class="fc"><h4>Account</h4><a onclick="openLdr()">Sign In</a><a onclick="openLdr()">Register</a><a>My Orders</a></div>
+  </div>
+  <div class="fbot">
+    <span class="fcopy">&copy; 2026 PROJECT REDROOM &middot; ALL RIGHTS RESERVED &middot; SINGAPORE</span>
+    <span class="fcopy">PRIVACY &middot; TERMS</span>
+  </div>
+</footer>
+</div><!-- /page-home -->
+
+<!-- ════════════ SHOP ════════════ -->
+<div class="page" id="page-shop">
+  <div class="phero">
+    <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:9px">All Products</div>
+    <div class="ptit">SHOP</div>
+    <div class="fbar">
+      <button class="fbtn on" onclick="setFilter(this,'all')">All</button>
+      <button class="fbtn" onclick="setFilter(this,'sunglasses')">Sunglasses</button>
+      <button class="fbtn" onclick="setFilter(this,'accessories')">Accessories</button>
+      <button class="fbtn" onclick="setFilter(this,'bundles')">Bundles</button>
+    </div>
+  </div>
+  <div class="pgrid" id="shopGrid">
+    <!-- D01 -->
+    <div class="pc" data-cat="sunglasses" onclick="goTo('product1')">
+      <div class="pim" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+        <svg viewBox="0 0 252 148" width="216" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="22,36 4,28 4,44 22,68" fill="#1c1c1c"/>
+          <polygon points="230,36 248,28 248,44 230,68" fill="#1c1c1c"/>
+          <path d="M22,24 L114,20 L114,112 L28,114 Q16,114 14,93 L12,34 Q12,24 22,24Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M24,26 L112,22 L112,109 L30,111 Q18,111 16,92 L14,35 Q14,26 24,26Z" fill="url(#LL)"/>
+          <path d="M26,26 L110,22 L110,34 L26,34Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M24,26 L112,22 L112,109 L30,111 Q18,111 16,92 L14,35 Q14,26 24,26Z" fill="url(#SH)"/>
+          <path d="M136,20 L230,24 Q238,24 238,34 L236,92 Q236,114 224,114 L136,112Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M138,22 L228,26 Q236,26 234,35 L234,92 Q234,111 222,111 L138,109Z" fill="url(#LR)"/>
+          <path d="M140,22 L226,26 L226,34 L140,34Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M138,22 L228,26 Q236,26 234,35 L234,92 Q234,111 222,111 L138,109Z" fill="url(#SH)"/>
+          <path d="M114,50 L125,42 L136,50 L136,64 Q125,57 114,64Z" fill="#060606"/>
+          <circle cx="28" cy="28" r="3.5" fill="url(#RV)"/>
+          <circle cx="224" cy="28" r="3.5" fill="url(#RV)"/>
+          <path d="M22,24 L114,20" stroke="#2a2a2a" stroke-width=".9" fill="none"/>
+          <path d="M136,20 L230,24" stroke="#2a2a2a" stroke-width=".9" fill="none"/>
+        </svg>
+        <div class="wbtn">&#x2661;</div><div class="pbadge">NEW</div>
+      </div>
+      <div class="pq">QUICK VIEW</div>
+      <div class="pinf"><div class="pn">Design 01</div><div class="ps">Oversized Square &middot; Black Acetate</div><div class="pp">S$79</div></div>
+    </div>
+    <!-- D02 -->
+    <div class="pc" data-cat="sunglasses" onclick="goTo('product2')">
+      <div class="pim" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+        <svg viewBox="0 0 252 132" width="216" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,36 4,28 4,44 20,64" fill="#1c1c1c"/>
+          <polygon points="232,36 248,28 248,44 232,64" fill="#1c1c1c"/>
+          <path d="M20,36 L116,32 L116,102 L26,104 Q14,104 12,84 L10,52 L20,36Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M22,38 L114,34 L114,99 L28,101 Q16,101 14,83 L12,53Z" fill="url(#LL)"/>
+          <path d="M24,38 L112,34 L112,46 L24,46Z" fill="url(#GT)" opacity=".88"/>
+          <path d="M22,38 L114,34 L114,99 L28,101 Q16,101 14,83 L12,53Z" fill="url(#SH)"/>
+          <path d="M136,32 L232,36 L240,52 L238,84 Q236,104 224,104 L136,102Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M138,34 L230,38 L238,53 L236,83 Q234,101 222,101 L138,99Z" fill="url(#LR)"/>
+          <path d="M140,34 L228,38 L228,46 L140,46Z" fill="url(#GT)" opacity=".88"/>
+          <path d="M138,34 L230,38 L238,53 L236,83 Q234,101 222,101 L138,99Z" fill="url(#SH)"/>
+          <path d="M116,56 Q126,47 136,56 L136,70 Q126,62 116,70Z" fill="#060606"/>
+          <circle cx="26" cy="40" r="3" fill="url(#RV)"/>
+          <circle cx="224" cy="40" r="3" fill="url(#RV)"/>
+          <circle cx="22" cy="38" r="2.2" fill="#A0202F"/>
+          <circle cx="230" cy="38" r="2.2" fill="#A0202F"/>
+        </svg>
+        <div class="wbtn">&#x2661;</div>
+      </div>
+      <div class="pq">QUICK VIEW</div>
+      <div class="pinf"><div class="pn">Design 02</div><div class="ps">Rectangular Cateye &middot; Black Acetate</div><div class="pp">S$79</div></div>
+    </div>
+    <!-- D03 -->
+    <div class="pc" data-cat="sunglasses" onclick="goTo('product3')">
+      <div class="pim" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+        <svg viewBox="0 0 252 120" width="216" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,38 4,30 4,46 18,62" fill="#1c1c1c"/>
+          <polygon points="234,38 248,30 248,46 234,62" fill="#1c1c1c"/>
+          <path d="M18,38 Q18,16 56,14 L108,14 Q116,14 116,24 L116,96 L32,99 Q14,99 14,74Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M20,40 Q20,18 58,16 L106,16 Q114,16 114,25 L114,93 L34,96 Q16,96 16,73Z" fill="url(#LL)"/>
+          <path d="M44,16 L106,16 Q114,16 112,22 L44,23Z" fill="url(#GT)" opacity=".88"/>
+          <path d="M20,40 Q20,18 58,16 L106,16 Q114,16 114,25 L114,93 L34,96 Q16,96 16,73Z" fill="url(#SH)"/>
+          <path d="M128,24 Q128,14 136,14 L188,14 Q228,16 228,38 L230,74 Q230,99 208,99 L128,96Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M130,25 Q130,16 138,16 L186,16 Q226,18 226,40 L228,73 Q228,96 206,96 L130,93Z" fill="url(#LR)"/>
+          <path d="M132,23 L190,24 L190,16 L138,16 Q132,16 132,23Z" fill="url(#GT)" opacity=".88"/>
+          <path d="M130,25 Q130,16 138,16 L186,16 Q226,18 226,40 L228,73 Q228,96 206,96 L130,93Z" fill="url(#SH)"/>
+          <path d="M116,45 Q122,37 128,45 L128,58 Q122,51 116,58Z" fill="#060606"/>
+          <circle cx="32" cy="18" r="3.5" fill="url(#RV)"/>
+          <circle cx="206" cy="18" r="3.5" fill="url(#RV)"/>
+          <circle cx="20" cy="40" r="2.2" fill="#A0202F"/>
+          <circle cx="226" cy="40" r="2.2" fill="#A0202F"/>
+        </svg>
+        <div class="wbtn">&#x2661;</div>
+      </div>
+      <div class="pq">QUICK VIEW</div>
+      <div class="pinf"><div class="pn">Design 03</div><div class="ps">Oval Cateye &middot; Black Acetate</div><div class="pp">S$79</div></div>
+    </div>
+    <!-- D04 -->
+    <div class="pc" data-cat="sunglasses" onclick="goTo('product4')">
+      <div class="pim" style="background:linear-gradient(145deg,#EDEAE5,#DDD8D0)">
+        <svg viewBox="0 0 252 106" width="216" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,28 4,20 4,36 20,56" fill="#1c1c1c"/>
+          <polygon points="232,28 248,20 248,36 232,56" fill="#1c1c1c"/>
+          <path d="M20,18 L116,16 L116,84 L26,86 Q14,86 12,70 L12,26 Q12,18 20,18Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M22,20 L114,18 L114,81 L28,83 Q16,83 14,69 L14,27 Q14,20 22,20Z" fill="url(#LL)"/>
+          <path d="M24,20 L112,18 L112,28 L24,28Z" fill="url(#GT)" opacity=".88"/>
+          <path d="M22,20 L114,18 L114,81 L28,83 Q16,83 14,69 L14,27 Q14,20 22,20Z" fill="url(#SH)"/>
+          <path d="M138,16 L234,18 Q242,18 242,26 L242,70 Q240,86 228,86 L138,84Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/>
+          <path d="M140,18 L232,20 Q240,20 238,27 L238,69 Q236,83 226,83 L140,81Z" fill="url(#LR)"/>
+          <path d="M142,18 L230,20 L230,28 L142,28Z" fill="url(#GT)" opacity=".88"/>
+          <path d="M140,18 L232,20 Q240,20 238,27 L238,69 Q236,83 226,83 L140,81Z" fill="url(#SH)"/>
+          <path d="M116,38 Q127,30 138,38 L138,50 Q127,44 116,50Z" fill="#060606"/>
+          <circle cx="26" cy="22" r="3.5" fill="url(#RV)"/>
+          <circle cx="226" cy="22" r="3.5" fill="url(#RV)"/>
+        </svg>
+        <div class="wbtn">&#x2661;</div>
+      </div>
+      <div class="pq">QUICK VIEW</div>
+      <div class="pinf"><div class="pn">Design 04</div><div class="ps">Rectangular &middot; Black Acetate</div><div class="pp">S$79</div></div>
+    </div>
+    <!-- The Set -->
+    <div class="pc" data-cat="bundles" onclick="goTo('collections')">
+      <div class="pim" style="background:linear-gradient(145deg,#281620,#180A10)">
+        <div style="text-align:center;padding:22px">
+          <div style="font-family:'Oswald';font-size:20px;letter-spacing:3px;color:#F7F4F0;text-transform:uppercase;line-height:1.0">The<br>REDROOM<br>Set</div>
+          <div style="width:24px;height:1px;background:#B49060;margin:10px auto"></div>
+          <div style="font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase">Complete Drop</div>
+        </div>
+        <div class="wbtn">&#x2661;</div><div class="pbadge" style="background:var(--c)">SET</div>
+      </div>
+      <div class="pq">VIEW SET</div>
+      <div class="pinf"><div class="pn">The REDROOM Set</div><div class="ps">Sunnies + Pouch + Box + Keychain</div><div class="pp">S$199</div></div>
+    </div>
+    <!-- Leather Pouch -->
+    <div class="pc" data-cat="accessories" onclick="addToCart(6,'Leather Pouch','Red Textured + Carabiner',49)">
+      <div class="pim" style="background:var(--s0)">
+        <svg viewBox="0 0 122 178" width="96" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="36" width="86" height="130" rx="6" fill="#5C0A14" stroke="#B49060" stroke-width="1.1"/>
+          <rect x="18" y="36" width="86" height="24" rx="6" fill="#4a0810"/>
+          <circle cx="61" cy="28" r="14" fill="none" stroke="#B49060" stroke-width="1.6"/>
+          <line x1="61" y1="42" x2="61" y2="36" stroke="#B49060" stroke-width="1.6"/>
+          <text x="61" y="104" text-anchor="middle" fill="rgba(255,255,255,.18)" font-family="Oswald" font-size="6.5" letter-spacing="2">REDROOM</text>
+        </svg>
+      </div>
+      <div class="pq">ADD TO CART</div>
+      <div class="pinf"><div class="pn">Leather Pouch</div><div class="ps">Red Textured &middot; Silver Carabiner</div><div class="pp">S$49</div></div>
+    </div>
+    <!-- Keychain Condom -->
+    <div class="pc" data-cat="accessories" onclick="addToCart(7,'Keychain \u2014 Condom','Metallic Silver',18)">
+      <div class="pim" style="background:var(--s0)">
+        <svg viewBox="0 0 104 158" width="78" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="52" cy="32" r="20" fill="none" stroke="#857F78" stroke-width="1.7"/>
+          <rect x="32" y="50" width="40" height="50" rx="4" fill="none" stroke="#8B1A2A" stroke-width="1.5"/>
+          <circle cx="52" cy="75" r="11" fill="none" stroke="#A09890" stroke-width="1.2"/>
+          <text x="52" y="130" text-anchor="middle" fill="#857F78" font-family="Inter" font-size="7" letter-spacing="2">CONDOM</text>
+        </svg>
+      </div>
+      <div class="pq">ADD TO CART</div>
+      <div class="pinf"><div class="pn">Keychain &mdash; Condom</div><div class="ps">Metallic Silver &middot; Engraved</div><div class="pp">S$18</div></div>
+    </div>
+    <!-- Keychain Cherry -->
+    <div class="pc" data-cat="accessories" onclick="addToCart(8,'Keychain \u2014 Cherry','Silver + Red Enamel',18)">
+      <div class="pim" style="background:var(--s0)">
+        <svg viewBox="0 0 104 158" width="78" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="52" cy="26" r="17" fill="none" stroke="#857F78" stroke-width="1.7"/>
+          <circle cx="34" cy="94" r="22" fill="#5C0A14" stroke="#857F78" stroke-width="1.2"/>
+          <circle cx="66" cy="86" r="22" fill="#5C0A14" stroke="#857F78" stroke-width="1.2"/>
+          <line x1="34" y1="72" x2="37" y2="43" stroke="#857F78" stroke-width="1.5"/>
+          <line x1="66" y1="64" x2="56" y2="43" stroke="#857F78" stroke-width="1.5"/>
+          <line x1="47" y1="43" x2="52" y2="26" stroke="#857F78" stroke-width="1.3"/>
+          <text x="52" y="130" text-anchor="middle" fill="#857F78" font-family="Inter" font-size="7" letter-spacing="2">CHERRY</text>
+        </svg>
+      </div>
+      <div class="pq">ADD TO CART</div>
+      <div class="pinf"><div class="pn">Keychain &mdash; Cherry</div><div class="ps">Metallic Silver &amp; Red Enamel</div><div class="pp">S$18</div></div>
+    </div>
+  </div>
+  <footer style="background:var(--c);padding:20px 52px">
+    <div class="fbot"><span class="fcopy">&copy; 2026 PROJECT REDROOM</span><span class="fcopy" style="cursor:pointer;color:#5A5550" onclick="window.scrollTo(0,0)">&uarr; TOP</span></div>
+  </footer>
+</div><!-- /page-shop -->
+
+<!-- ════════════ PRODUCT PAGES ════════════ -->
+<!-- Each product reuses same layout, different SVG + specs -->
+
+<div class="page" id="page-product1">
+  <div class="pdl">
+    <div class="pgal">
+      <div class="gm" style="background:linear-gradient(145deg,#EDEAE5,#E0DDD8)">
+        <svg viewBox="0 0 450 268" width="396" xmlns="http://www.w3.org/2000/svg">
+          <defs><filter id="pd1"><feDropShadow dx="0" dy="9" stdDeviation="16" flood-color="#1a1a1a" flood-opacity=".25"/></filter></defs>
+          <polygon points="42,70 4,56 4,84 42,136" fill="#1c1c1c"/>
+          <polygon points="408,70 446,56 446,84 408,136" fill="#1c1c1c"/>
+          <path d="M42,46 L210,38 L210,214 L190,220 L52,214 Q36,214 34,172 L32,62 Q32,46 42,46Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.5" filter="url(#pd1)"/>
+          <path d="M44,50 L208,42 L208,210 L54,213 Q38,213 36,171 L34,64 Q34,50 44,50Z" fill="url(#LL)"/>
+          <path d="M44,50 L208,42 L208,210 L54,213 Q38,213 36,171 L34,64 Q34,50 44,50Z" fill="url(#SH)"/>
+          <path d="M48,50 L206,42 L206,61 L48,63Z" fill="url(#GT)" opacity=".95"/>
+          <path d="M238,38 L408,46 Q416,46 416,62 L414,172 Q414,214 398,214 L258,220 L238,214Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.5" filter="url(#pd1)"/>
+          <path d="M240,42 L406,50 Q414,50 412,64 L412,171 Q412,213 396,213 L240,210Z" fill="url(#LR)"/>
+          <path d="M240,42 L406,50 Q414,50 412,64 L412,171 Q412,213 396,213 L240,210Z" fill="url(#SH)"/>
+          <path d="M242,42 L404,50 L404,61 L242,61Z" fill="url(#GT)" opacity=".95"/>
+          <path d="M210,90 Q224,74 238,90 L238,128 Q224,112 210,128Z" fill="#080808" stroke="#111" stroke-width=".8"/>
+          <path d="M214,95 Q224,80 234,95 L234,123 Q224,109 214,123Z" fill="#050505"/>
+          <circle cx="52" cy="56" r="5.5" fill="url(#RV)"/>
+          <circle cx="398" cy="56" r="5.5" fill="url(#RV)"/>
+          <path d="M42,46 L210,38" stroke="#2e2e2e" stroke-width="1.5" fill="none"/>
+          <path d="M238,38 L408,46" stroke="#2e2e2e" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="gts">
+        <div class="gt on">FRONT</div><div class="gt">3/4</div><div class="gt">SIDE</div><div class="gt">DETAIL</div>
+      </div>
+    </div>
+    <div class="ppan">
+      <div class="pbc"><span onclick="goTo('shop')">SHOP</span> &nbsp;/&nbsp; <span onclick="goTo('shop')">SUNGLASSES</span> &nbsp;/&nbsp; <span>DESIGN 01</span></div>
+      <div class="pdn">DESIGN 01</div>
+      <div class="pdt">Oversized Square &middot; Black Acetate</div>
+      <div class="pdp">S$79</div>
+      <div class="div"></div>
+      <div class="sg">
+        <div><div class="sl">Frame Front</div><div class="sv">148.2mm</div></div>
+        <div><div class="sl">Frame Side</div><div class="sv">147mm</div></div>
+        <div><div class="sl">Lens Width</div><div class="sv">65.3mm</div></div>
+        <div><div class="sl">Lens Height</div><div class="sv">55.8mm</div></div>
+        <div><div class="sl">Bridge</div><div class="sv">15mm</div></div>
+        <div><div class="sl">Material</div><div class="sv">Italian Acetate</div></div>
+      </div>
+      <div class="div"></div>
+      <div class="ol">Colour</div>
+      <div class="sws"><div class="sw on" style="background:#0d0d0d" title="Black"></div></div>
+      <div class="pctas">
+        <button class="br" onclick="addToCart(1,'Design 01','Oversized Square',79)">ADD TO CART &mdash; S$79</button>
+        <button class="bo" onclick="toast('Added to wishlist')">&#x2661; &nbsp; ADD TO WISHLIST</button>
+      </div>
+      <div class="sgl" onclick="openSG()">&nearr; View Size Guide</div>
+      <div class="div" style="margin-top:22px"></div>
+      <div style="font-size:12.5px;color:var(--m);line-height:1.85">Oversized square flat-bar frame in black Italian acetate. Subtle cat-eye lift at outer corner. Riveted silver hardware at temples.</div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-product2">
+  <div class="pdl">
+    <div class="pgal">
+      <div class="gm" style="background:linear-gradient(145deg,#EDEAE5,#E0DDD8)">
+        <svg viewBox="0 0 450 252" width="396" xmlns="http://www.w3.org/2000/svg">
+          <defs><filter id="pd2"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#1a1a1a" flood-opacity=".24"/></filter></defs>
+          <polygon points="38,66 4,52 4,80 38,122" fill="#1c1c1c"/>
+          <polygon points="412,66 446,52 446,80 412,122" fill="#1c1c1c"/>
+          <path d="M38,66 L212,60 L212,182 L196,186 L44,183 Q30,183 28,156 L26,88 L38,66Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.4" filter="url(#pd2)"/>
+          <path d="M40,69 L210,63 L210,179 L46,181 Q32,181 30,155 L28,89Z" fill="url(#LL)"/>
+          <path d="M40,69 L210,63 L210,179 L46,181 Q32,181 30,155 L28,89Z" fill="url(#SH)"/>
+          <path d="M42,69 L208,63 L208,80 L42,80Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M236,60 L412,66 L420,88 L418,156 Q416,183 402,183 L252,186 L236,182Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.4" filter="url(#pd2)"/>
+          <path d="M238,63 L410,69 L418,89 L416,155 Q414,181 400,181 L238,179Z" fill="url(#LR)"/>
+          <path d="M238,63 L410,69 L418,89 L416,155 Q414,181 400,181 L238,179Z" fill="url(#SH)"/>
+          <path d="M240,63 L408,69 L408,80 L240,80Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M212,94 Q224,78 236,94 L236,126 Q224,110 212,126Z" fill="#080808"/>
+          <circle cx="44" cy="73" r="4.5" fill="url(#RV)"/>
+          <circle cx="402" cy="73" r="4.5" fill="url(#RV)"/>
+          <circle cx="40" cy="69" r="3.5" fill="#A0202F"/>
+          <circle cx="410" cy="69" r="3.5" fill="#A0202F"/>
+        </svg>
+      </div>
+      <div class="gts"><div class="gt on">FRONT</div><div class="gt">3/4</div><div class="gt">SIDE</div><div class="gt">DETAIL</div></div>
+    </div>
+    <div class="ppan">
+      <div class="pbc"><span onclick="goTo('shop')">SHOP</span> / <span>DESIGN 02</span></div>
+      <div class="pdn">DESIGN 02</div>
+      <div class="pdt">Rectangular Cateye &middot; Black Acetate</div>
+      <div class="pdp">S$79</div>
+      <div class="div"></div>
+      <div class="sg">
+        <div><div class="sl">Frame Front</div><div class="sv">146.8mm</div></div>
+        <div><div class="sl">Frame Side</div><div class="sv">144mm</div></div>
+        <div><div class="sl">Lens Width</div><div class="sv">53.3mm</div></div>
+        <div><div class="sl">Lens Height</div><div class="sv">35mm</div></div>
+        <div><div class="sl">Bridge</div><div class="sv">19mm</div></div>
+        <div><div class="sl">Material</div><div class="sv">Italian Acetate</div></div>
+      </div>
+      <div class="div"></div>
+      <div class="sws"><div class="sw on" style="background:#0d0d0d"></div></div>
+      <div class="pctas">
+        <button class="br" onclick="addToCart(3,'Design 02','Rectangular Cateye',79)">ADD TO CART &mdash; S$79</button>
+        <button class="bo" onclick="toast('Added to wishlist')">&#x2661; &nbsp; ADD TO WISHLIST</button>
+      </div>
+      <div class="sgl" onclick="openSG()">&nearr; View Size Guide</div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-product3">
+  <div class="pdl">
+    <div class="pgal">
+      <div class="gm" style="background:linear-gradient(145deg,#EDEAE5,#E0DDD8)">
+        <svg viewBox="0 0 450 238" width="396" xmlns="http://www.w3.org/2000/svg">
+          <defs><filter id="pd3"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#1a1a1a" flood-opacity=".23"/></filter></defs>
+          <polygon points="34,66 4,54 4,78 34,114" fill="#1c1c1c"/>
+          <polygon points="416,66 446,54 446,78 416,114" fill="#1c1c1c"/>
+          <path d="M34,66 Q34,32 78,28 L212,28 Q222,28 222,44 L222,190 L40,194 Q26,194 24,162Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.4" filter="url(#pd3)"/>
+          <path d="M36,69 Q36,34 80,30 L210,30 Q220,30 220,45 L220,186 L42,190 Q28,190 26,161Z" fill="url(#LL)"/>
+          <path d="M36,69 Q36,34 80,30 L210,30 Q220,30 220,45 L220,186 L42,190 Q28,190 26,161Z" fill="url(#SH)"/>
+          <path d="M68,30 L210,30 Q220,30 218,38 L68,40Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M226,44 Q226,28 234,28 L370,28 Q416,32 416,66 L418,162 Q418,194 402,194 L226,190Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.4" filter="url(#pd3)"/>
+          <path d="M228,45 Q228,30 236,30 L368,30 Q414,34 414,69 L416,161 Q416,190 400,190 L228,186Z" fill="url(#LR)"/>
+          <path d="M228,45 Q228,30 236,30 L368,30 Q414,34 414,69 L416,161 Q416,190 400,190 L228,186Z" fill="url(#SH)"/>
+          <path d="M230,42 L376,43 L376,30 L236,30 Q230,30 230,42Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M222,82 Q224,68 226,82 L226,108 Q224,96 222,108Z" fill="#080808"/>
+          <circle cx="42" cy="34" r="4.5" fill="url(#RV)"/>
+          <circle cx="400" cy="34" r="4.5" fill="url(#RV)"/>
+          <circle cx="34" cy="69" r="3.5" fill="#A0202F"/>
+          <circle cx="414" cy="69" r="3.5" fill="#A0202F"/>
+        </svg>
+      </div>
+      <div class="gts"><div class="gt on">FRONT</div><div class="gt">3/4</div><div class="gt">SIDE</div><div class="gt">DETAIL</div></div>
+    </div>
+    <div class="ppan">
+      <div class="pbc"><span onclick="goTo('shop')">SHOP</span> / <span>DESIGN 03</span></div>
+      <div class="pdn">DESIGN 03</div>
+      <div class="pdt">Oval Cateye &middot; Black Acetate</div>
+      <div class="pdp">S$79</div>
+      <div class="div"></div>
+      <div class="sg">
+        <div><div class="sl">Frame Front</div><div class="sv">147.2mm</div></div>
+        <div><div class="sl">Frame Side</div><div class="sv">146.3mm</div></div>
+        <div><div class="sl">Lens Width</div><div class="sv">53.5mm</div></div>
+        <div><div class="sl">Lens Height</div><div class="sv">33.3mm</div></div>
+        <div><div class="sl">Bridge</div><div class="sv">21mm</div></div>
+        <div><div class="sl">Material</div><div class="sv">Italian Acetate</div></div>
+      </div>
+      <div class="div"></div>
+      <div class="sws"><div class="sw on" style="background:#0d0d0d"></div></div>
+      <div class="pctas">
+        <button class="br" onclick="addToCart(4,'Design 03','Oval Cateye',79)">ADD TO CART &mdash; S$79</button>
+        <button class="bo" onclick="toast('Added to wishlist')">&#x2661; &nbsp; ADD TO WISHLIST</button>
+      </div>
+      <div class="sgl" onclick="openSG()">&nearr; View Size Guide</div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-product4">
+  <div class="pdl">
+    <div class="pgal">
+      <div class="gm" style="background:linear-gradient(145deg,#EDEAE5,#E0DDD8)">
+        <svg viewBox="0 0 450 224" width="396" xmlns="http://www.w3.org/2000/svg">
+          <defs><filter id="pd4"><feDropShadow dx="0" dy="7" stdDeviation="13" flood-color="#1a1a1a" flood-opacity=".22"/></filter></defs>
+          <polygon points="38,58 4,46 4,70 38,106" fill="#1c1c1c"/>
+          <polygon points="412,58 446,46 446,70 412,106" fill="#1c1c1c"/>
+          <path d="M38,46 L212,42 L212,168 L34,172 Q22,172 20,150 L20,58 Q20,46 38,46Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.4" filter="url(#pd4)"/>
+          <path d="M40,49 L210,45 L210,165 L36,169 Q24,169 22,149 L22,60 Q22,49 40,49Z" fill="url(#LL)"/>
+          <path d="M40,49 L210,45 L210,165 L36,169 Q24,169 22,149 L22,60 Q22,49 40,49Z" fill="url(#SH)"/>
+          <path d="M42,49 L208,45 L208,58 L42,58Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M238,42 L412,46 Q422,46 422,58 L422,150 Q420,172 408,172 L238,168Z" fill="#0e0e0e" stroke="#181818" stroke-width="1.4" filter="url(#pd4)"/>
+          <path d="M240,45 L410,49 Q420,49 418,60 L418,149 Q416,169 406,169 L240,165Z" fill="url(#LR)"/>
+          <path d="M240,45 L410,49 Q420,49 418,60 L418,149 Q416,169 406,169 L240,165Z" fill="url(#SH)"/>
+          <path d="M242,45 L408,49 L408,58 L242,58Z" fill="url(#GT)" opacity=".9"/>
+          <path d="M212,78 Q225,64 238,78 L238,104 Q225,92 212,104Z" fill="#080808"/>
+          <circle cx="38" cy="53" r="4.5" fill="url(#RV)"/>
+          <circle cx="406" cy="53" r="4.5" fill="url(#RV)"/>
+        </svg>
+      </div>
+      <div class="gts"><div class="gt on">FRONT</div><div class="gt">3/4</div><div class="gt">SIDE</div><div class="gt">DETAIL</div></div>
+    </div>
+    <div class="ppan">
+      <div class="pbc"><span onclick="goTo('shop')">SHOP</span> / <span>DESIGN 04</span></div>
+      <div class="pdn">DESIGN 04</div>
+      <div class="pdt">Rectangular &middot; Black Acetate</div>
+      <div class="pdp">S$79</div>
+      <div class="div"></div>
+      <div class="sg">
+        <div><div class="sl">Frame Front</div><div class="sv">146.8mm</div></div>
+        <div><div class="sl">Frame Side</div><div class="sv">146.5mm</div></div>
+        <div><div class="sl">Lens Width</div><div class="sv">52.2mm</div></div>
+        <div><div class="sl">Lens Height</div><div class="sv">33.2mm</div></div>
+        <div><div class="sl">Bridge</div><div class="sv">22mm</div></div>
+        <div><div class="sl">Material</div><div class="sv">Italian Acetate</div></div>
+      </div>
+      <div class="div"></div>
+      <div class="sws"><div class="sw on" style="background:#0d0d0d"></div></div>
+      <div class="pctas">
+        <button class="br" onclick="addToCart(5,'Design 04','Rectangular',79)">ADD TO CART &mdash; S$79</button>
+        <button class="bo" onclick="toast('Added to wishlist')">&#x2661; &nbsp; ADD TO WISHLIST</button>
+      </div>
+      <div class="sgl" onclick="openSG()">&nearr; View Size Guide</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ COLLECTIONS ════════════ -->
+<div class="page" id="page-collections">
+  <div class="cban">
+    <div class="cban-bg" style="background:linear-gradient(160deg,#18140F 0%,#281620 55%,#18140F 100%)"></div>
+    <div style="position:relative;z-index:1">
+      <div style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--g);margin-bottom:10px">The REDROOM Drop</div>
+      <div style="font-family:'Oswald';font-size:clamp(48px,7vw,76px);font-weight:500;color:#F7F4F0;line-height:.9;letter-spacing:3px;text-transform:uppercase">THE COMPLETE<br>SET.</div>
+      <div style="font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--s3);margin-top:12px">400 Units &middot; Once Gone, Gone</div>
+    </div>
+  </div>
+  <div class="setgrid">
+    <div class="stile">
+      <div>
+        <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:9px">What's Included</div>
+        <div style="font-family:'Oswald';font-size:38px;letter-spacing:3px;font-weight:500;text-transform:uppercase;line-height:.95;margin-bottom:14px">The REDROOM Set</div>
+        <div style="font-size:13px;color:var(--m);line-height:1.85;max-width:360px;margin-bottom:28px">Everything you need. Nothing you don't. The complete REDROOM drop — designed as a single unified object, not a product bundle.</div>
+        <div style="display:flex;flex-direction:column;gap:1px;background:var(--s1)">
+          <div style="background:var(--w);padding:18px;display:flex;justify-content:space-between"><div><div style="font-size:10.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase">Sunglasses</div><div style="font-size:10.5px;color:var(--s3);margin-top:2px">Choice of Design 01&ndash;04 &middot; Black Italian acetate</div></div><div style="font-family:'Oswald';font-size:16px">S$79</div></div>
+          <div style="background:var(--w);padding:18px;display:flex;justify-content:space-between"><div><div style="font-size:10.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase">Leather Pouch + Strap</div><div style="font-size:10.5px;color:var(--s3);margin-top:2px">Red textured &middot; Silver carabiner &middot; 19.5&times;10&times;4cm</div></div><div style="font-family:'Oswald';font-size:16px">S$49</div></div>
+          <div style="background:var(--w);padding:18px;display:flex;justify-content:space-between"><div><div style="font-size:10.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase">Box Packaging</div><div style="font-size:10.5px;color:var(--s3);margin-top:2px">Dark red hard box &middot; Embossed logo &middot; Metallic silver interior</div></div><div style="font-family:'Oswald';font-size:16px;color:var(--s3)">Incl.</div></div>
+          <div style="background:var(--w);padding:18px;display:flex;justify-content:space-between"><div><div style="font-size:10.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase">Keychain</div><div style="font-size:10.5px;color:var(--s3);margin-top:2px">Condom or Cherry &middot; 200 of each variant</div></div><div style="font-family:'Oswald';font-size:16px;color:var(--s3)">Incl.</div></div>
+          <div style="background:var(--p);padding:18px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:11.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase">The REDROOM Set</div><div style="font-family:'Oswald';font-size:21px;color:var(--r)">S$199</div></div>
+        </div>
+      </div>
+      <button class="bd" style="margin-top:20px;width:100%;text-align:center;padding:14px" onclick="addToCart(2,'The REDROOM Set','Sunnies + Pouch + Box + Keychain',199)">ADD TO CART &mdash; S$199</button>
+    </div>
+    <div class="stile-vis">
+      <svg viewBox="0 0 266 288" width="232" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="10" width="186" height="116" rx="4" fill="#380810" stroke="#7A1020" stroke-width="1.5"/>
+        <rect x="40" y="10" width="186" height="29" rx="4" fill="#5C0A14"/>
+        <text x="133" y="28" text-anchor="middle" fill="rgba(255,255,255,.38)" font-family="Oswald" font-size="8" letter-spacing="5">PROJECT REDROOM</text>
+        <rect x="58" y="47" width="58" height="39" rx="4" fill="#120408" stroke="#7A1020" stroke-width=".9"/>
+        <rect x="150" y="47" width="58" height="39" rx="4" fill="#120408" stroke="#7A1020" stroke-width=".9"/>
+        <line x1="116" y1="66" x2="150" y2="66" stroke="#7A1020" stroke-width=".9"/>
+        <rect x="16" y="140" width="68" height="98" rx="5" fill="#5C0A14" stroke="#B49060" stroke-width="1"/>
+        <circle cx="50" cy="132" r="12" fill="none" stroke="#B49060" stroke-width="1.2"/>
+        <rect x="182" y="154" width="36" height="46" rx="4" fill="none" stroke="#B49060" stroke-width="1.2"/>
+        <circle cx="200" cy="146" r="9.5" fill="none" stroke="#B49060" stroke-width="1.2"/>
+        <rect x="98" y="162" width="56" height="62" rx="2" fill="#340810" stroke="#7A1020" stroke-width=".9"/>
+        <text x="133" y="256" text-anchor="middle" fill="rgba(255,255,255,.46)" font-family="Oswald" font-size="9.5" letter-spacing="4">S$199</text>
+      </svg>
+    </div>
+  </div>
+  <!-- 4 frames below -->
+  <div style="background:var(--s0);padding:60px 68px 44px">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:9px">The Frames</div>
+      <div style="font-family:'Oswald';font-size:32px;letter-spacing:4px;font-weight:500;text-transform:uppercase">Four Designs. One Intent.</div>
+    </div>
+    <div class="pgrid" style="background:var(--s1)">
+      <div class="pc" onclick="goTo('product1')"><div class="pim" style="background:var(--w)"><svg viewBox="0 0 230 130" width="194" xmlns="http://www.w3.org/2000/svg"><polygon points="18,34 2,26 2,42 18,62" fill="#1c1c1c"/><polygon points="212,34 228,26 228,42 212,62" fill="#1c1c1c"/><path d="M18,22 L108,18 L108,106 L24,108 Q12,108 10,88 L8,30 Q8,22 18,22Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M20,24 L106,20 L106,103 L26,105 Q14,105 12,87 L10,31 Q10,24 20,24Z" fill="url(#LL)"/><path d="M22,24 L104,20 L104,32 L22,32Z" fill="url(#GT)" opacity=".9"/><path d="M122,18 L212,22 Q220,22 220,30 L218,88 Q218,108 206,108 L122,106Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M124,20 L210,24 Q218,24 216,31 L216,87 Q216,105 204,105 L124,103Z" fill="url(#LR)"/><path d="M126,20 L208,24 L208,32 L126,32Z" fill="url(#GT)" opacity=".9"/><path d="M108,46 Q115,38 122,46 L122,59 Q115,53 108,59Z" fill="#060606"/><circle cx="24" cy="26" r="3.5" fill="url(#RV)"/><circle cx="204" cy="26" r="3.5" fill="url(#RV)"/></svg><div class="pq">VIEW</div></div><div class="pinf"><div class="pn">01 &mdash; Oversized Square</div><div class="pp">S$79</div></div></div>
+      <div class="pc" onclick="goTo('product2')"><div class="pim" style="background:var(--w)"><svg viewBox="0 0 230 114" width="194" xmlns="http://www.w3.org/2000/svg"><polygon points="18,34 2,26 2,42 18,62" fill="#1c1c1c"/><polygon points="212,34 228,26 228,42 212,62" fill="#1c1c1c"/><path d="M18,34 L110,30 L110,96 L24,98 Q12,98 10,78 L8,50 L18,34Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M20,36 L108,32 L108,93 L26,95 Q14,95 12,77 L10,51Z" fill="url(#LL)"/><path d="M22,36 L106,32 L106,44 L22,44Z" fill="url(#GT)" opacity=".88"/><path d="M122,30 L212,34 L220,50 L218,78 Q216,98 204,98 L122,96Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M124,32 L210,36 L218,51 L216,77 Q214,95 202,95 L124,93Z" fill="url(#LR)"/><path d="M126,32 L208,36 L208,44 L126,44Z" fill="url(#GT)" opacity=".88"/><path d="M110,54 Q116,46 122,54 L122,67 Q116,60 110,67Z" fill="#060606"/><circle cx="24" cy="38" r="3" fill="url(#RV)"/><circle cx="204" cy="38" r="3" fill="url(#RV)"/><circle cx="20" cy="36" r="2.2" fill="#A0202F"/><circle cx="210" cy="36" r="2.2" fill="#A0202F"/></svg><div class="pq">VIEW</div></div><div class="pinf"><div class="pn">02 &mdash; Rectangular Cateye</div><div class="pp">S$79</div></div></div>
+      <div class="pc" onclick="goTo('product3')"><div class="pim" style="background:var(--w)"><svg viewBox="0 0 230 102" width="194" xmlns="http://www.w3.org/2000/svg"><polygon points="16,36 2,28 2,44 16,58" fill="#1c1c1c"/><polygon points="214,36 228,28 228,44 214,58" fill="#1c1c1c"/><path d="M16,36 Q16,14 52,12 L104,12 Q112,12 112,22 L112,88 L28,91 Q10,91 10,66Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M18,38 Q18,16 54,14 L102,14 Q110,14 110,23 L110,85 L30,88 Q12,88 12,65Z" fill="url(#LL)"/><path d="M40,14 L102,14 Q110,14 108,20 L40,21Z" fill="url(#GT)" opacity=".88"/><path d="M120,22 Q120,12 128,12 L178,12 Q214,14 214,36 L216,66 Q216,91 194,91 L120,88Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M122,23 Q122,14 130,14 L176,14 Q212,16 212,38 L214,65 Q214,88 192,88 L122,85Z" fill="url(#LR)"/><path d="M124,21 L182,22 L182,14 L130,14 Q124,14 124,21Z" fill="url(#GT)" opacity=".88"/><path d="M112,42 Q116,34 120,42 L120,54 Q116,48 112,54Z" fill="#060606"/><circle cx="28" cy="16" r="3.5" fill="url(#RV)"/><circle cx="192" cy="16" r="3.5" fill="url(#RV)"/><circle cx="18" cy="38" r="2.2" fill="#A0202F"/><circle cx="212" cy="38" r="2.2" fill="#A0202F"/></svg><div class="pq">VIEW</div></div><div class="pinf"><div class="pn">03 &mdash; Oval Cateye</div><div class="pp">S$79</div></div></div>
+      <div class="pc" onclick="goTo('product4')"><div class="pim" style="background:var(--w)"><svg viewBox="0 0 230 96" width="194" xmlns="http://www.w3.org/2000/svg"><polygon points="18,26 2,18 2,34 18,52" fill="#1c1c1c"/><polygon points="212,26 228,18 228,34 212,52" fill="#1c1c1c"/><path d="M18,16 L110,14 L110,80 L24,82 Q12,82 10,66 L10,24 Q10,16 18,16Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M20,18 L108,16 L108,77 L26,79 Q14,79 12,65 L12,25 Q12,18 20,18Z" fill="url(#LL)"/><path d="M22,18 L106,16 L106,26 L22,26Z" fill="url(#GT)" opacity=".88"/><path d="M122,14 L212,16 Q220,16 220,24 L220,66 Q218,82 206,82 L122,80Z" fill="#0d0d0d" stroke="#181818" stroke-width="1" filter="url(#FC)"/><path d="M124,16 L210,18 Q218,18 216,25 L216,65 Q214,79 204,79 L124,77Z" fill="url(#LR)"/><path d="M126,16 L208,18 L208,26 L126,26Z" fill="url(#GT)" opacity=".88"/><path d="M110,34 Q116,26 122,34 L122,46 Q116,40 110,46Z" fill="#060606"/><circle cx="24" cy="20" r="3.5" fill="url(#RV)"/><circle cx="204" cy="20" r="3.5" fill="url(#RV)"/></svg><div class="pq">VIEW</div></div><div class="pinf"><div class="pn">04 &mdash; Rectangular</div><div class="pp">S$79</div></div></div>
+    </div>
+  </div>
+  <footer style="background:var(--c);padding:20px 52px"><div class="fbot"><span class="fcopy">&copy; 2026 PROJECT REDROOM &middot; SINGAPORE</span></div></footer>
+</div>
+
+<!-- ════════════ ABOUT ════════════ -->
+<div class="page" id="page-about">
+  <div class="ahero">
+    <div class="ahbg" style="background:linear-gradient(160deg,#18140F 0%,#281620 60%,#18140F 100%)"></div>
+    <div style="position:relative;z-index:1">
+      <div style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--g);margin-bottom:12px">About Project Redroom</div>
+      <div style="font-family:'Oswald';font-size:clamp(46px,6.5vw,76px);font-weight:500;color:#F7F4F0;line-height:.9;letter-spacing:3px;text-transform:uppercase">BE THE<br>PROVOCATION.</div>
+      <div style="font-size:13.5px;color:var(--s3);margin-top:20px;line-height:1.85;max-width:460px">Project REDROOM is not a brand. It is a statement — worn on your face. Dark, deliberate, disruptive. Built in Singapore.</div>
+    </div>
+  </div>
+  <div class="asec" style="background:var(--w)">
+    <div class="agrid">
+      <div>
+        <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:12px">The DNA</div>
+        <div style="font-family:'Oswald';font-size:clamp(30px,3.6vw,42px);letter-spacing:3px;font-weight:500;text-transform:uppercase;line-height:.98;margin-bottom:20px">Four principles.<br>Zero compromise.</div>
+        <div style="font-size:13.5px;color:var(--m);line-height:1.9;margin-bottom:28px">REDROOM began with one question: why do good-looking frames cost three times what they should? The answer was always the logo. We removed it. We kept everything else.</div>
+        <button class="bo" onclick="goTo('shop')">SHOP THE COLLECTION</button>
+      </div>
+      <div class="aimg" style="background:linear-gradient(145deg,#E8E4DE,#D4CFC8)">
+        <svg viewBox="0 0 270 340" width="230" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="135" cy="228" rx="106" ry="13" fill="rgba(0,0,0,.07)"/>
+          <polygon points="40,140 16,130 16,150 40,178" fill="#181818"/>
+          <polygon points="230,140 254,130 254,150 230,178" fill="#181818"/>
+          <path d="M40,126 L128,121 L128,190 L46,193 Q32,193 30,170 L28,140 Q28,126 40,126Z" fill="#0d0508" stroke="#8B1A2A" stroke-width="1.1"/>
+          <path d="M42,129 L126,124 L126,187 L48,190 Q34,190 32,169 L30,141 Q30,129 42,129Z" fill="#160810"/>
+          <path d="M44,129 L124,124 L124,140 L44,141Z" fill="rgba(255,255,255,.18)"/>
+          <path d="M142,121 L230,126 Q238,126 238,140 L236,169 Q236,193 222,193 L142,190Z" fill="#0d0508" stroke="#8B1A2A" stroke-width="1.1"/>
+          <path d="M144,124 L228,129 Q236,129 234,141 L234,169 Q234,190 220,190 L144,187Z" fill="#160810"/>
+          <path d="M146,124 L226,129 L226,140 L146,141Z" fill="rgba(255,255,255,.18)"/>
+          <path d="M128,155 Q135,145 142,155 L142,168 Q135,159 128,168Z" fill="#050505"/>
+          <circle cx="46" cy="130" r="4" fill="#aaa"/>
+          <circle cx="222" cy="130" r="4" fill="#aaa"/>
+          <text x="135" y="52" text-anchor="middle" fill="rgba(0,0,0,.09)" font-family="Inter" font-size="9.5" letter-spacing="3">EDITORIAL</text>
+          <line x1="46" y1="62" x2="224" y2="62" stroke="rgba(0,0,0,.06)" stroke-width=".5"/>
+          <text x="135" y="308" text-anchor="middle" fill="rgba(0,0,0,.13)" font-family="Oswald" font-size="7.5" letter-spacing="5">PROJECT REDROOM</text>
+        </svg>
+      </div>
+    </div>
+    <div class="dna-g">
+      <div class="dna-i"><div class="dna-n">01</div><div class="dna-t">Dark by Design</div><div class="dna-tx">Every frame begins in black. Not because it's easy — because darkness is deliberate. We remove colour to make you feel powerful.</div></div>
+      <div class="dna-i"><div class="dna-n">02</div><div class="dna-t">Italian Acetate</div><div class="dna-tx">Same suppliers as the houses you can't afford. Premium material. No luxury tax. You pay for the frame, not the logo.</div></div>
+      <div class="dna-i"><div class="dna-n">03</div><div class="dna-t">400 Pieces Only</div><div class="dna-tx">Exclusivity is a constraint we imposed on ourselves. 400 units. Once they're gone, the room closes. No restocks.</div></div>
+      <div class="dna-i"><div class="dna-n">04</div><div class="dna-t">The Room Is Red</div><div class="dna-tx">Red isn't decorative. It's confrontational — the shade of something that refuses to disappear into the background.</div></div>
+    </div>
+  </div>
+  <!-- Lifestyle grid -->
+  <div style="background:var(--c);padding:68px">
+    <div style="font-family:'Oswald';font-size:clamp(26px,3.5vw,38px);letter-spacing:4px;font-weight:500;color:#fff;text-transform:uppercase;margin-bottom:38px">Worn everywhere<br><em style="font-weight:300;font-style:italic">that matters.</em></div>
+    <div class="lgrid">
+      <div class="lp" style="background:linear-gradient(160deg,#1a0508,#281018,#0e0e0e)">
+        <svg viewBox="0 0 190 190" width="150" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,88 2,80 2,96 18,118" fill="#181818"/>
+          <polygon points="172,88 188,80 188,96 172,118" fill="#181818"/>
+          <path d="M18,76 L88,72 L88,132 L24,134 Q12,134 10,114 L8,90 L18,76Z" fill="#0d0508" stroke="#8B1A2A" stroke-width=".9"/>
+          <path d="M20,78 L86,74 L86,129 L26,131 Q14,131 12,112 L10,91 Q10,78 20,78Z" fill="#160810"/>
+          <path d="M22,78 L84,74 L84,88 L22,88Z" fill="rgba(255,255,255,.18)"/>
+          <path d="M102,72 L172,76 L178,90 L176,112 Q174,134 162,134 L102,132Z" fill="#0d0508" stroke="#8B1A2A" stroke-width=".9"/>
+          <path d="M104,74 L170,78 L176,91 L174,111 Q172,131 160,131 L104,129Z" fill="#160810"/>
+          <path d="M106,74 L168,78 L168,88 L106,88Z" fill="rgba(255,255,255,.18)"/>
+          <path d="M88,101 Q95,92 102,101 L102,113 Q95,105 88,113Z" fill="#050505"/>
+          <circle cx="24" cy="80" r="3" fill="#888"/>
+          <circle cx="160" cy="80" r="3" fill="#888"/>
+        </svg>
+      </div>
+      <div class="lp" style="background:var(--s0)">
+        <div style="padding:26px;text-align:center">
+          <div style="font-family:'Oswald';font-size:26px;font-weight:500;color:var(--c);line-height:.93;letter-spacing:2px;text-transform:uppercase">"Not a brand.<br>A statement."</div>
+          <div style="width:26px;height:1px;background:var(--r);margin:14px auto"></div>
+          <div style="font-size:8.5px;letter-spacing:3px;color:var(--s3);text-transform:uppercase">Brand Manifesto</div>
+        </div>
+      </div>
+      <div class="lp" style="background:linear-gradient(145deg,#18140F,#28201A)">
+        <div style="text-align:center;padding:26px">
+          <div style="font-family:'Oswald';font-size:36px;font-weight:500;color:rgba(255,255,255,.07);line-height:.9;letter-spacing:3px;text-transform:uppercase">BE THE<br>PROVO<br>CATION.</div>
+          <div style="font-size:8.5px;letter-spacing:4px;color:rgba(255,255,255,.16);text-transform:uppercase;margin-top:18px">Singapore &middot; 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nl-bar">
+    <div><div class="nl-tit">STAY IN THE ROOM.</div><div class="nl-sub">Early access and drop alerts</div></div>
+    <div class="nl-frm"><input class="nl-in" type="email" placeholder="your@email.com" id="nli2"><button class="br" onclick="toast('You\'re on the list.')">SUBSCRIBE</button></div>
+  </div>
+  <footer><div class="fbot"><span class="fcopy">&copy; 2026 PROJECT REDROOM &middot; SINGAPORE</span></div></footer>
+</div>
+
+<!-- ════════════ FAQ ════════════ -->
+<div class="page" id="page-faq">
+  <div class="fhero">
+    <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--s3);margin-bottom:9px">Help &amp; Support</div>
+    <div style="font-family:'Oswald';font-size:48px;letter-spacing:5px;font-weight:500;text-transform:uppercase">FAQ</div>
+  </div>
+  <div class="fbody">
+    <div class="fsbar">
+      <div class="fsi on" onclick="showFaq('returns')">Returns &amp; Exchange</div>
+      <div class="fsi" onclick="showFaq('payment')">Payment &amp; Shipping</div>
+      <div class="fsi" onclick="showFaq('product')">Product &amp; Care</div>
+      <div class="fsi" onclick="showFaq('account')">Account</div>
+    </div>
+    <div class="fcon">
+      <div class="fsec on" id="faq-returns">
+        <div class="fst">Returns &amp; Exchange</div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">What is your return policy? <span class="fqi">+</span></div><div class="fa">We accept returns within 14 days of delivery for items in original, unworn condition with all original packaging intact. Items must be unused and undamaged. Sale items are non-returnable. To initiate a return, email hello@projectredroom.com with your order number.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I exchange for a different design? <span class="fqi">+</span></div><div class="fa">Exchanges are subject to availability. Given our limited run of 400 units, we can't guarantee exchange stock. Contact us within 14 days. If we can't process an exchange, a full refund will be issued.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">My item arrived damaged — what do I do? <span class="fqi">+</span></div><div class="fa">Photograph the product and packaging and email us within 48 hours of delivery. We will arrange a replacement or full refund promptly.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">Who covers return shipping costs? <span class="fqi">+</span></div><div class="fa">We cover return shipping for faulty or incorrect items. For change-of-mind returns, the customer is responsible. Use a tracked service — we can't be responsible for items lost in transit.</div></div>
+      </div>
+      <div class="fsec" id="faq-payment">
+        <div class="fst">Payment &amp; Shipping</div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">What payment methods do you accept? <span class="fqi">+</span></div><div class="fa">We accept all major credit/debit cards (Visa, Mastercard, Amex), PayNow, PayLah, GrabPay, and Apple Pay. All transactions are processed securely via Stripe.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How long does delivery take? <span class="fqi">+</span></div><div class="fa">Standard delivery within Singapore takes 3–5 business days. Express same-day delivery is available for orders placed before 12pm. International shipping to Southeast Asia takes 7–14 business days.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">Do you ship internationally? <span class="fqi">+</span></div><div class="fa">We ship to Singapore, Malaysia, Indonesia, Thailand, and the Philippines. Import duties and taxes are the responsibility of the recipient.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">Is there free shipping? <span class="fqi">+</span></div><div class="fa">Free standard shipping on all Singapore orders above S$100. Below S$100, standard shipping is S$5. International rates are calculated at checkout.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I track my order? <span class="fqi">+</span></div><div class="fa">Once your order ships, you'll receive a confirmation email with a tracking number. You can also track via your account dashboard.</div></div>
+      </div>
+      <div class="fsec" id="faq-product">
+        <div class="fst">Product &amp; Care</div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">What material are the frames? <span class="fqi">+</span></div><div class="fa">All REDROOM frames are crafted from Italian acetate — a premium cellulose-based material used by top European eyewear houses. Hypoallergenic, durable, and far superior to injection-moulded plastic.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I clean my sunglasses? <span class="fqi">+</span></div><div class="fa">Use the included microfibre lens cloth for lenses. Wipe the frame with a slightly damp cloth. Avoid abrasive materials, household cleaners, or prolonged direct sunlight which can warp acetate over time.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">Are the lenses UV-protective? <span class="fqi">+</span></div><div class="fa">Yes. All lenses provide 100% UVA and UVB protection (UV400). The dark tint also significantly reduces glare — ideal for Singapore's conditions.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I store the frames? <span class="fqi">+</span></div><div class="fa">Store in the included red leather pouch when not in use. Avoid leaving in hot cars or direct sunlight. If frames become misaligned, visit a local optician for a free adjustment.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">Are the frames unisex? <span class="fqi">+</span></div><div class="fa">All four designs are intentionally unisex. The oversized and cateye designs lean more feminine; the slim rectangular is more androgynous. Try all four — the right frame is the one you feel most yourself in.</div></div>
+      </div>
+      <div class="fsec" id="faq-account">
+        <div class="fst">Account</div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">Do I need an account to order? <span class="fqi">+</span></div><div class="fa">No — you can checkout as a guest. An account lets you track orders, save wishlists, and get early drop access.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I reset my password? <span class="fqi">+</span></div><div class="fa">Click Sign In and select "Forgot password?" Enter your registered email and we'll send a reset link within minutes.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I view my order history? <span class="fqi">+</span></div><div class="fa">Log in and navigate to My Orders. All past orders are listed with status and tracking information.</div></div>
+        <div class="fi-item"><div class="fq" onclick="toggleFaq(this)">How do I contact customer support? <span class="fqi">+</span></div><div class="fa">Email hello@projectredroom.com. We respond within 1 business day. Include "URGENT" in the subject for time-sensitive issues.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="nl-bar">
+    <div><div class="nl-tit">STILL HAVE QUESTIONS?</div><div class="nl-sub">Email hello@projectredroom.com</div></div>
+    <button class="bo" style="color:var(--s1);border-color:rgba(255,255,255,.18);flex-shrink:0">CONTACT US</button>
+  </div>
+  <footer><div class="fbot"><span class="fcopy">&copy; 2026 PROJECT REDROOM &middot; SINGAPORE</span></div></footer>
+</div>
+
+<!-- ════════════ CHECKOUT ════════════ -->
+<div class="page" id="page-checkout">
+  <div class="cow">
+    <div>
+      <div style="display:flex;gap:0;margin-bottom:40px">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;background:var(--c);color:var(--w)">Shipping</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;background:var(--s0);color:var(--s3)">Payment</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;background:var(--s0);color:var(--s3)">Confirm</div>
+      </div>
+      <div style="font-family:'Oswald';font-size:29px;letter-spacing:4px;font-weight:500;text-transform:uppercase;margin-bottom:26px">Shipping Details</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
+        <div><label class="fl">First Name</label><input class="fi" placeholder="First name"></div>
+        <div><label class="fl">Last Name</label><input class="fi" placeholder="Last name"></div>
+        <div style="grid-column:1/-1"><label class="fl">Email</label><input class="fi" type="email" placeholder="your@email.com"></div>
+        <div style="grid-column:1/-1"><label class="fl">Address</label><input class="fi" placeholder="Street address"></div>
+        <div><label class="fl">City</label><input class="fi" placeholder="City"></div>
+        <div><label class="fl">Postal Code</label><input class="fi" placeholder="000000"></div>
+        <div style="grid-column:1/-1"><label class="fl">Country</label><select class="fi"><option>Singapore</option><option>Malaysia</option><option>Indonesia</option><option>Thailand</option></select></div>
+      </div>
+      <button class="bd" style="margin-top:26px;padding:14px 32px" onclick="toast('Proceeding to payment...')">CONTINUE TO PAYMENT &rarr;</button>
+      <button class="bo" style="margin-top:9px;padding:10px 32px;display:block" onclick="goTo('shop')">&#x2190; BACK TO SHOP</button>
+    </div>
+    <div style="background:var(--p);padding:26px;border:1px solid var(--s1);align-self:start">
+      <div style="font-family:'Oswald';font-size:16px;letter-spacing:3px;color:var(--c);margin-bottom:16px;text-transform:uppercase">Order Summary</div>
+      <div style="height:1px;background:var(--s1);margin-bottom:16px"></div>
+      <div id="coitems" style="margin-bottom:16px"></div>
+      <div style="height:1px;background:var(--s1);margin-bottom:13px"></div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:7px"><span style="font-size:10.5px;color:var(--f)">Subtotal</span><span id="cosub" style="font-size:11.5px;color:var(--c)">S$0</span></div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:13px"><span style="font-size:10.5px;color:var(--f)">Shipping</span><span style="font-size:10.5px;color:var(--f)">TBC</span></div>
+      <div style="height:1px;background:var(--c);margin-bottom:13px"></div>
+      <div style="display:flex;justify-content:space-between"><span style="font-family:'Oswald';font-size:17px;text-transform:uppercase">Total</span><span id="cotot" style="font-family:'Oswald';font-size:17px">S$0</span></div>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/main.js" defer></script>
+</body>
+</html>
